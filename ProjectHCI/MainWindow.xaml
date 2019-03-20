@@ -5,9 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectHCI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Width="50px" Height="50px">test</Button>
+        Title="Spomenici" FontSize="15" Height="350" Width="525">
+    <DockPanel>
+        <Menu DockPanel.Dock ="Top" Height="50px">
+            
+            <Menu.ItemsPanel>
+                <!--Podkontrola koja određuje kako se item-i prikazuju.-->
+                <ItemsPanelTemplate>
+                    <!-- Specificiramo ne šta je u kontroli nego template koji je formira-->
+                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                    <!-- Prikazujemo preko Dock Panela koji preuzme sav prostor -->
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="_Spomenici"  FontSize="15" Icon="">
+                
+                <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="_Pretrazi spomenike" Click="Search_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="_Mapa spomenika" Click="ShowMap_Click"></MenuItem>
+                
+            </MenuItem>
+
+            <MenuItem Header="_Help" FontSize="15" HorizontalAlignment="Right">
+                <MenuItem Header="_Turtorial" HorizontalAlignment="Center" Click="Turtorial_click"></MenuItem>
+            </MenuItem>
+            
+            
+        </Menu>
         
-    </Grid>
+            
+        <Menu Width="150px" BorderBrush="Azure" BorderThickness="5px">
+            <Menu.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Height="50px"></MenuItem>
+            <Separator Width="150px" Margin="0,0,0,0"/>
+            <MenuItem Header="_Pretrazi spomenike" FontSize="15" Click="Search_Click" Height="50px"></MenuItem>
+            <Separator Width="150px"></Separator>
+            <MenuItem Header="_Mapa spomenika" FontSize="15" Click="ShowMap_Click" Height="50px"></MenuItem>
+            <Separator Width="150px"></Separator>
+
+        </Menu>
+
+
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        
+    </DockPanel>
 </Window>

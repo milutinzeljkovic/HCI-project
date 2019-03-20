@@ -24,5 +24,27 @@ namespace ProjectHCI
         {
             InitializeComponent();
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ShowMap_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Turtorial_click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        
+
     }
 }
