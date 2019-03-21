@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectHCI"
         mc:Ignorable="d"
-        Title="Spomenici" FontSize="15" Height="350" Width="525">
+        
+        Title="Spomenici" FontSize="15" Height="700" Width="1225">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Converter" />
+    </Window.Resources>
     <DockPanel>
-        <Menu DockPanel.Dock ="Top" Height="50px">
+        <Menu DockPanel.Dock ="Top" Height="50px" Background="#2c5e87" BorderBrush="White" BorderThickness="2px" >
             
             <Menu.ItemsPanel>
                 <!--Podkontrola koja određuje kako se item-i prikazuju.-->
@@ -17,7 +21,7 @@
                     <!-- Prikazujemo preko Dock Panela koji preuzme sav prostor -->
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="_Spomenici"  FontSize="15" Icon="">
+            <MenuItem Header="_Spomenici" Foreground="White" FontSize="15" Icon="">
                 
                 <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click"></MenuItem>
                 <Separator></Separator>
@@ -33,25 +37,57 @@
             
             
         </Menu>
-        
-            
-        <Menu Width="150px" BorderBrush="Azure" BorderThickness="5px">
+
+
+        <Menu Width="150px" BorderBrush="White" BorderThickness="2px" Background="#4288c1">
             <Menu.ItemsPanel >
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical"/>
+                    <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Height="50px"></MenuItem>
-            <Separator Width="150px" Margin="0,0,0,0"/>
-            <MenuItem Header="_Pretrazi spomenike" FontSize="15" Click="Search_Click" Height="50px"></MenuItem>
+            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Foreground="White" Height="50px">
+                
+            </MenuItem>
             <Separator Width="150px"></Separator>
-            <MenuItem Header="_Mapa spomenika" FontSize="15" Click="ShowMap_Click" Height="50px"></MenuItem>
+            <MenuItem Header="_Pretrazi spomenike" FontSize="15" Click="Search_Click" Foreground="White" Height="50px" >
+                
+            </MenuItem>
+            <Separator Width="150px"></Separator>
+            <MenuItem Header="_Mapa spomenika" FontSize="15" Click="ShowMap_Click" Foreground="White" Height="50px"></MenuItem>
             <Separator Width="150px"></Separator>
 
         </Menu>
 
 
-        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,100,100"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Margin="5"  Padding="5" BorderThickness="2" BorderBrush="#4288c1" Background="White" CornerRadius="10">
+                <Label>Name:</Label>
+            </Border>
+
+            <TextBox Grid.Column="1" Margin="0,0,0,10" />
+            <Label Grid.Row="1">E-mail:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"  />
+            <Label Grid.Row="2">Comment:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
+            <Label Grid.Row="3">Comment:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" />
+            <Label Grid.Row="4">Comment:</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
+            <Label Grid.Row="4">Comment:</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
+        </Grid>
         
     </DockPanel>
 </Window>

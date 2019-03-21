@@ -20,14 +20,23 @@ namespace ProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _showPanel;
         public MainWindow()
         {
+            
+
             InitializeComponent();
+            _showPanel = false;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public bool ShowPanel
+        {
+            get { return _showPanel; }
         }
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
