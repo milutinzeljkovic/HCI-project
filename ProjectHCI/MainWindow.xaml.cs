@@ -31,7 +31,7 @@ namespace ProjectHCI
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBox.Show("klik");
         }
 
         public bool ShowPanel

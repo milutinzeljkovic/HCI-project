@@ -7,7 +7,51 @@
         mc:Ignorable="d"
         
         Title="Spomenici" FontSize="15" Height="700" Width="1225">
+    
     <Window.Resources>
+
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+        <Style x:Key="fancyButtonStyle" TargetType="Label">
+            
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4288c1"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+
+        <Style x:Key="fancyButtonHoverStyle" TargetType="Button"  BasedOn="{StaticResource ResourceKey=fancyButtonStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Lavender" Opacity="80" Direction="270" ShadowDepth="10"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <BooleanToVisibilityConverter x:Key="Converter" />
     </Window.Resources>
     <DockPanel>
@@ -45,7 +89,7 @@
                     <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Foreground="White" Height="50px">
+            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Foreground="White" Height="50px"  >
                 
             </MenuItem>
             <Separator Width="150px"></Separator>
@@ -72,20 +116,28 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border Margin="5"  Padding="5" BorderThickness="2" BorderBrush="#4288c1" Background="White" CornerRadius="10">
-                <Label>Name:</Label>
+            <Border Margin="0,0,5,8"  Padding="5" BorderThickness="2" BorderBrush="#4288c1" Background="White" CornerRadius="10">
+                <Label Height="20px" Padding="0px" RenderTransformOrigin="0.727,0.54"  VerticalAlignment="Top">Name:</Label>
             </Border>
 
-            <TextBox Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="1">E-mail:</Label>
+            <TextBox Grid.Column="1" Margin="0,0,0,10" BorderThickness="2px" BorderBrush="#4288c1" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Grid.Row="1" Style="{StaticResource ResourceKey=fancyButtonStyle}">E-mail:</Label>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"  />
-            <Label Grid.Row="2">Comment:</Label>
+            <Label Grid.Row="2" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="3">Comment:</Label>
+            <Label Grid.Row="3" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
             <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="4">Comment:</Label>
+            <Label Grid.Row="4" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="4">Comment:</Label>
+            <Label Grid.Row="4" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
         </Grid>
         
