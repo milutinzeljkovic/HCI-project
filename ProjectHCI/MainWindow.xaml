@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         
         Title="Spomenici" FontSize="15" Height="700" Width="1225">
-    
+
     <Window.Resources>
 
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
@@ -32,7 +32,7 @@
 
 
         <Style x:Key="fancyButtonStyle" TargetType="Label">
-            
+
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="BorderThickness" Value="2"/>
@@ -56,7 +56,7 @@
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock ="Top" Height="50px" Background="#2c5e87" BorderBrush="White" BorderThickness="2px" >
-            
+
             <Menu.ItemsPanel>
                 <!--Podkontrola koja određuje kako se item-i prikazuju.-->
                 <ItemsPanelTemplate>
@@ -66,44 +66,64 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="_Spomenici" Foreground="White" FontSize="15" Icon="">
-                
+
                 <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="_Pretrazi spomenike" Click="Search_Click"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="_Mapa spomenika" Click="ShowMap_Click"></MenuItem>
-                
+
             </MenuItem>
 
             <MenuItem Header="_Help" FontSize="15" HorizontalAlignment="Right">
                 <MenuItem Header="_Turtorial" HorizontalAlignment="Center" Click="Turtorial_click"></MenuItem>
             </MenuItem>
-            
-            
+
+
         </Menu>
 
 
-        <Menu Width="150px" BorderBrush="White" BorderThickness="2px" Background="#4288c1">
+        <Menu Width="150px" BorderBrush="#4288c1" BorderThickness="2px" Background="white" Margin="0,0.4">
             <Menu.ItemsPanel >
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click" Foreground="White" Height="50px"  >
-                
+            <MenuItem Header="_Dodaj spomenik" FontSize="15"  Click="Add_Click" Foreground="#4288c1" Height="50px"  Background="white" BorderBrush="#4288c1" Margin="5,5,5,5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
             </MenuItem>
-            <Separator Width="150px"></Separator>
-            <MenuItem Header="_Pretrazi spomenike" FontSize="15" Click="Search_Click" Foreground="White" Height="50px" >
-                
+            <MenuItem Header="_Mapa spomenika" FontSize="15" Click="ShowMap_Click" Foreground="#4288c1" Height="50px" BorderBrush="#4288c1" Margin="5,5,5,5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
             </MenuItem>
-            <Separator Width="150px"></Separator>
-            <MenuItem Header="_Mapa spomenika" FontSize="15" Click="ShowMap_Click" Foreground="White" Height="50px"></MenuItem>
-            <Separator Width="150px"></Separator>
+            <MenuItem Header="_Pretrazi spomenike" FontSize="15"  Click="Search_Click"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,5,5,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
 
         </Menu>
 
 
-        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,100,100"  >
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="99.6,100,100.4,100" Height="444"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -114,13 +134,25 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border Margin="0,0,5,8"  Padding="5" BorderThickness="2" BorderBrush="#4288c1" Background="White" CornerRadius="10">
-                <Label Height="20px" Padding="0px" RenderTransformOrigin="0.727,0.54"  VerticalAlignment="Top">Name:</Label>
-            </Border>
+            <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center">Name:</Label>
 
-            <TextBox Grid.Column="1" Margin="0,0,0,10" BorderThickness="2px" BorderBrush="#4288c1" >
+
+            <TextBox Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                <TextBox.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" >E-mail:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -129,17 +161,76 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <Label Grid.Row="1" Style="{StaticResource ResourceKey=fancyButtonStyle}">E-mail:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"  />
-            <Label Grid.Row="2" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="3" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="4" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
-            <Label Grid.Row="4" Style="{StaticResource ResourceKey=fancyButtonStyle}">Comment:</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" />
+            <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center">Comment:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" >Comment:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Grid.Row="4" ></Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center">Komentar:</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,380,10" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button Grid.Row="5" Grid.Column="1" Margin="66.6,22,633,192" Height="30px" Width="80px" Background="#f27b7b">
+                <Label Foreground="white" HorizontalAlignment="Center">
+                    Cancel
+                </Label>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="5" Grid.Column="1" Margin="261.6,22,440,192" Height="30px"  Width="80px" Background="#008CBA">
+                <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Add
+                </Label>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+
+                </Button.Resources>
+            </Button>
         </Grid>
-        
+
     </DockPanel>
 </Window>
