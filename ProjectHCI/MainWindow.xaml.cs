@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectHCI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,18 +21,26 @@ namespace ProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private GridViewModel GridViewModel { get; set; }
         private bool _showPanel;
+        
         public MainWindow()
         {
             
-
             InitializeComponent();
             _showPanel = false;
+            GridViewModel = new GridViewModel();
+            
+            this.DataContext = GridViewModel;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("klik");
+           
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = !vis;
         }
 
         public bool ShowPanel
@@ -53,7 +62,15 @@ namespace ProjectHCI
         {
             
         }
-        
+
+        private void ButtonCancelClik(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = !vis;
+        }
+
 
     }
 }

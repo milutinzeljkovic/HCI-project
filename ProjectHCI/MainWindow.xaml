@@ -9,7 +9,7 @@
         Title="Spomenici" FontSize="15" Height="700" Width="1225">
 
     <Window.Resources>
-
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="Black"
@@ -56,28 +56,10 @@
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock ="Top" Height="50px" Background="#2c5e87" BorderBrush="White" BorderThickness="2px" >
-
-            <Menu.ItemsPanel>
-                <!--Podkontrola koja određuje kako se item-i prikazuju.-->
-                <ItemsPanelTemplate>
-                    <!-- Specificiramo ne šta je u kontroli nego template koji je formira-->
-                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
-                    <!-- Prikazujemo preko Dock Panela koji preuzme sav prostor -->
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            <MenuItem Header="_Spomenici" Foreground="White" FontSize="15" Icon="">
-
-                <MenuItem Header="_Dodaj spomenik" FontSize="15" Click="Add_Click"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="_Pretrazi spomenike" Click="Search_Click"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="_Mapa spomenika" Click="ShowMap_Click"></MenuItem>
-
-            </MenuItem>
-
-            <MenuItem Header="_Help" FontSize="15" HorizontalAlignment="Right">
-                <MenuItem Header="_Turtorial" HorizontalAlignment="Center" Click="Turtorial_click"></MenuItem>
-            </MenuItem>
+            <Label Foreground="White">
+                Ovde logo
+            </Label>
+            
 
 
         </Menu>
@@ -89,7 +71,7 @@
                     <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="_Dodaj spomenik" FontSize="15"  Click="Add_Click" Foreground="#4288c1" Height="50px"  Background="white" BorderBrush="#4288c1" Margin="5,5,5,5">
+            <MenuItem  Header="_Dodaj spomenik" FontSize="15"  Click="Add_Click" Foreground="#4288c1" Height="50px"  Background="white" BorderBrush="#4288c1" Margin="5,5,5,5">
                 <MenuItem.Resources>
                     <Style TargetType="{x:Type Border}">
 
@@ -123,10 +105,12 @@
         </Menu>
 
 
-        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="99.6,100,100.4,100" Height="444"  >
+        <Grid DockPanel.Dock="Bottom" 
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="99.6,100,100.4,100" Height="444"  
+               Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -202,7 +186,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <Button Grid.Row="5" Grid.Column="1" Margin="66.6,22,633,192" Height="30px" Width="80px" Background="#f27b7b">
+            <Button Grid.Row="5" Grid.Column="1" Margin="66.6,22,633,192" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
                 <Label Foreground="white" HorizontalAlignment="Center">
                     Cancel
                 </Label>
@@ -231,6 +215,20 @@
                 </Button.Resources>
             </Button>
         </Grid>
+        <Grid Width="800px" Height="500px" Visibility="Visible" Background="Aquamarine">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+        </Grid>
+
 
     </DockPanel>
+
+    
+    
 </Window>
