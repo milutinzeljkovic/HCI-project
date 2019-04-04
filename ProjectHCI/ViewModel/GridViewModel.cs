@@ -13,6 +13,9 @@ namespace ProjectHCI.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool gridFormVisible = false;
+        private bool gridTableVisible = false;
+        private bool gridForm2Visible = false;
+        private bool gridFormPart2Visible = false;
 
         public bool GridFormVisible
         {
@@ -27,6 +30,50 @@ namespace ProjectHCI.ViewModel
                 
             }
         }
+
+        public bool GridFormPart2Visible
+        {
+            get
+            {
+                return gridFormPart2Visible;
+            }
+            set
+            {
+                gridFormPart2Visible = value;
+                NotifyPropertyChanged("GridFormPart2Visible");
+
+            }
+        }
+
+
+        public bool GridForm2Visible
+        {
+            get
+            {
+                return gridForm2Visible;
+            }
+            set
+            {
+                gridForm2Visible = value;
+                NotifyPropertyChanged("GridForm2Visible");
+
+            }
+        }
+
+        public bool GridTableVisible
+        {
+            get
+            {
+                return gridTableVisible;
+            }
+            set
+            {
+                gridTableVisible = value;
+                NotifyPropertyChanged("GridTableVisible");
+
+            }
+        }
+
 
         private void NotifyPropertyChanged(string info)
         {

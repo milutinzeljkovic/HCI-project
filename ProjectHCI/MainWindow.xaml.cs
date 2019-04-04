@@ -1,4 +1,5 @@
 ﻿using ProjectHCI.ViewModel;
+using ProjectHCI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace ProjectHCI
 {
@@ -21,26 +23,46 @@ namespace ProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         private GridViewModel GridViewModel { get; set; }
         private bool _showPanel;
+
         
+
+        public static ObservableCollection<Spomenik> Spomenici
+        {
+            get;
+            set;
+        }
+
         public MainWindow()
         {
+
             
             InitializeComponent();
             _showPanel = false;
             GridViewModel = new GridViewModel();
             
             this.DataContext = GridViewModel;
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+
+            Spomenici = new ObservableCollection<Spomenik>();
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-           
+            this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
-            (this.DataContext as GridViewModel).GridFormVisible = !vis;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridFormVisible = true;
+            
         }
 
         public bool ShowPanel
@@ -55,7 +77,12 @@ namespace ProjectHCI
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridForm2Visible;
             
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = true;
+            this.DataContext = this;
         }
 
         private void Turtorial_click(object sender, RoutedEventArgs e)
@@ -66,9 +93,37 @@ namespace ProjectHCI
         private void ButtonCancelClik(object sender, RoutedEventArgs e)
         {
             //dodaj ono da li ste sigurni...
+            this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
 
-            (this.DataContext as GridViewModel).GridFormVisible = !vis;
+            (this.DataContext as GridViewModel).GridFormVisible = false; ;
+
+            
+        }
+        private void ButtonAddSpomenikClik(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = true;
+
+
+        }
+
+        private void ButtonBackClick(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = true;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+
+
         }
 
 
