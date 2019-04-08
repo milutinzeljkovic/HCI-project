@@ -114,13 +114,13 @@
 
         <DockPanel DockPanel.Dock="Left" Width="1265" Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
             <Grid DockPanel.Dock="Left" 
-              Width="810px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,41.4,71"  
+              Width="1000px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
                Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="400px" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="410px"/>
+                    <ColumnDefinition Width="500px"/>
                     <ColumnDefinition Width="500px"/>
 
                 </Grid.ColumnDefinitions>
@@ -282,6 +282,21 @@
                 <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
                 <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
                 Name="calendar1" VerticalAlignment="Top" Width="180" />
+                <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Ikonica:</Label>
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White">
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
                 <Button Grid.Row="4" Grid.Column="1" Margin="25.6,0,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Back
@@ -295,7 +310,7 @@
                         </Style>
 
                     </Button.Resources>
-                </Button> 
+                </Button>
                 <Button Grid.Row="4" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
@@ -321,7 +336,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,100,400,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -443,7 +458,7 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <Button Grid.Row="8" Grid.Column="1" Margin="25.8,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
+                <Button Grid.Row="8" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Cancel
                     </Label>
@@ -487,7 +502,9 @@
 
         </DockPanel>
 
-
+        <DockPanel Width="1065px" Height="500px" DockPanel.Dock="Left" Margin="0,0,0,0" Visibility="{Binding Path=GridMapVisible, Converter={StaticResource BoolToVisConverter} }">
+            <Image Source="mapanovisad.jpg" Margin="0,0,100,100" />
+        </DockPanel>
 
 
 

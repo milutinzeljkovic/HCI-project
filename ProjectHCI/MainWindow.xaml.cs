@@ -70,6 +70,8 @@ namespace ProjectHCI
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridMapVisible = false;
+
             (this.DataContext as GridViewModel).GridFormVisible = true;
             
         }
@@ -81,7 +83,14 @@ namespace ProjectHCI
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
-           
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridForm2Visible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridMapVisible = true;
+
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -91,6 +100,7 @@ namespace ProjectHCI
             
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridMapVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = true;
             this.DataContext = this;
         }

@@ -15,7 +15,21 @@ namespace ProjectHCI.ViewModel
         private bool gridFormVisible = false;
         private bool gridTableVisible = false;
         private bool gridForm2Visible = false;
+        private bool gridMapVisible = false;
+
         private bool gridFormPart2Visible = false;
+
+
+        public bool GridMapVisible
+        {
+            get { return gridMapVisible; }
+            set { gridMapVisible = value;
+                NotifyPropertyChanged("GridMapVisible");
+            }
+        }
+
+
+
 
         public bool GridFormVisible
         {
