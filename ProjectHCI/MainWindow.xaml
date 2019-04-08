@@ -55,7 +55,7 @@
         <BooleanToVisibilityConverter x:Key="Converter" />
     </Window.Resources>
     <DockPanel Margin="0,0,0,0">
-        
+
 
 
         <Menu DockPanel.Dock ="Top" Height="50px" Background="#2c5e87" BorderBrush="White" BorderThickness="2px" >
@@ -66,6 +66,8 @@
 
 
         </Menu>
+
+
 
 
 
@@ -110,239 +112,404 @@
 
         </Menu>
 
-        <Grid DockPanel.Dock="Bottom" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,50,401.4,100" Height="539"  
+        <DockPanel DockPanel.Dock="Left" Width="1265" Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
+            <Grid DockPanel.Dock="Left" 
+              Width="810px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,41.4,71"  
                Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" >
-            <Grid.RowDefinitions>
-                <RowDefinition />
-               
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Spomenici}" IsReadOnly="True"/>
-        </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400px" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="410px"/>
+                    <ColumnDefinition Width="500px"/>
 
-        <Grid DockPanel.Dock="Bottom" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-30,50,401.4,100" Height="559"  
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Spomenici}" IsReadOnly="True">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Width" Value="100px"/>
+
+                        </Style>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Height" Value="35px"/>
+
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="#4288c1"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="Foreground"  Value="#4288c1"/>
+                            <Setter Property="Height" Value="35px"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#4288c1"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+                    </DataGrid.Resources>
+                </DataGrid>
+                <Grid Grid.Column="1" Grid.Row="0" DataContext="{Binding ElementName=dgrMain,Path=SelectedItem}" Margin="10,0,0,0" Height="400px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45px"/>
+                        <RowDefinition Height="45px"/>
+                        <RowDefinition Height="45px"/>
+                        <RowDefinition Height="45px"/>
+                        <RowDefinition Height="45px"/>
+                        <RowDefinition Height="50px"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Ime:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Era:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">Era:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center">Opis:</TextBlock>
+
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Ime}"   BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Opis}"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Era}"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Era}"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Era}"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Era}"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Margin="5,0,99.4,1.2">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="BorderBrush" Value="#4288c1"/>
+                                <Setter Property="BorderThickness" Value="5px"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+
+                </Grid>
+
+            </Grid>
+
+
+
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }">
+            <Grid DockPanel.Dock="Top" 
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,400,100" Height="559"  
                Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >UNESCO:</Label>
-            <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
-            <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="180px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >UNESCO:</Label>
+                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
 
-            <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Naseljeno met:</Label>
-            <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
-            <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
-            <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
-            <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
+                <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Naseljeno met:</Label>
+                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
+                <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
+                <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
                 Name="calendar1" VerticalAlignment="Top" Width="180" />
-            <Button Grid.Row="3" Grid.Column="1" Margin="25.6,155.4,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
-                <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
-                    Back
-                </Label>
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
+                <Button Grid.Row="4" Grid.Column="1" Margin="25.6,0,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
+                        Back
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
 
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
 
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="3" Grid.Column="1" Margin="270,155.4,435,-134.2" Height="30px"  Width="80px" Background="#008CBA" >
-                <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
-                    Add
-                </Label>
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
+                    </Button.Resources>
+                </Button> 
+                <Button Grid.Row="4" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddClick" >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        Add
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
 
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
 
-                </Button.Resources>
-            </Button>
-            
-        </Grid>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+
+
+        </DockPanel>
 
 
 
-        <Grid DockPanel.Dock="Bottom" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,50,401.4,100" Height="539"  
+
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
+            <Grid DockPanel.Dock="Top" 
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,400,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px" />
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px" />
-            </Grid.RowDefinitions>
-            <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px" />
+                </Grid.RowDefinitions>
+                <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
 
-            <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
-                <TextBox.Resources>
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                    <TextBox.Resources>
 
-                    <Style TargetType="{x:Type Border}">
+                        <Style TargetType="{x:Type Border}">
 
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,0.4,5.6">Tip:</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="26,8.2,405.6,7.4" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="25,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,0.4,5.6">Tip:</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="26,8.2,405.6,7.4" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
-            <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
+                <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
 
-            <ComboBox Grid.Row="5"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px"  Height="30px" Width="350px" >
-                <ComboBox.Resources>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="Background" Value="White"/>
-                        <Setter Property="BorderBrush" Value="#000000"/>
-                    </Style>
-                    <!-- color of ComboBoxItem -->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
+                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px"  Height="30px" Width="350px" >
+                    <ComboBox.Resources>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#000000"/>
+                        </Style>
+                        <!-- color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
 
-                    <!-- Mouse over color of ComboBoxItem -->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
-                </ComboBox.Resources>
-
-
-                <ComboBoxItem>Paleolit</ComboBoxItem>
-                <ComboBoxItem>Neolit</ComboBoxItem>
-                <ComboBoxItem>Stari vek</ComboBoxItem>
-                <ComboBoxItem>Srednji vek</ComboBoxItem>
-                <ComboBoxItem>Rensesansa</ComboBoxItem>
-                <ComboBoxItem>Moderno doba</ComboBoxItem>
-
-            </ComboBox>
-            <Label Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
-            <ComboBox Grid.Row="6"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" >
-                <ComboBox.Resources>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="Background" Value="White"/>
-                        <Setter Property="BorderBrush" Value="#000000"/>
-                    </Style>
-                    <!-- color of ComboBoxItem -->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
-
-                    <!-- Mouse over color of ComboBoxItem -->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
-                </ComboBox.Resources>
+                        <!-- Mouse over color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
+                    </ComboBox.Resources>
 
 
-                <ComboBoxItem>Eksploatisan</ComboBoxItem>
-                <ComboBoxItem>Dostupan</ComboBoxItem>
-                <ComboBoxItem>Nedostupan</ComboBoxItem>
+                    <ComboBoxItem>Paleolit</ComboBoxItem>
+                    <ComboBoxItem>Neolit</ComboBoxItem>
+                    <ComboBoxItem>Stari vek</ComboBoxItem>
+                    <ComboBoxItem>Srednji vek</ComboBoxItem>
+                    <ComboBoxItem>Rensesansa</ComboBoxItem>
+                    <ComboBoxItem>Moderno doba</ComboBoxItem>
 
-            </ComboBox>
-            
+                </ComboBox>
+                <Label Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
+                <ComboBox Grid.Row="6"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" >
+                    <ComboBox.Resources>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#000000"/>
+                        </Style>
+                        <!-- color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
 
-            <Label Grid.Row="4"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
+                        <!-- Mouse over color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
+                    </ComboBox.Resources>
 
-            <Button Grid.Row="9" Grid.Column="1" Margin="25.8,15.6,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
-                <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
-                    Cancel
-                </Label>
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
 
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
+                    <ComboBoxItem>Eksploatisan</ComboBoxItem>
+                    <ComboBoxItem>Dostupan</ComboBoxItem>
+                    <ComboBoxItem>Nedostupan</ComboBoxItem>
 
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="9" Grid.Column="1" Margin="270.8,15.6,430.8,0" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddSpomenikClik" VerticalAlignment="Top">
-                <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
-                    Add
-                </Label>
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
+                </ComboBox>
 
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="BorderBrush" Value="#4288c1"/>
-                        <Setter Property="BorderThickness" Value="5px"/>
-                    </Style>
 
-                </Button.Resources>
-            </Button>
-        </Grid>
-        <Grid Width="370" Margin="650,50.4,0,-248.4" Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <Label Grid.Row="4"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            
+                <Button Grid.Row="8" Grid.Column="1" Margin="25.8,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
+                        Cancel
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
 
-        </Grid>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="8" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddSpomenikClik" VerticalAlignment="Top">
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        Next
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <Grid Width="370" Margin="650,50.4,0,-248.4" Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+            </Grid>
+
+
+        </DockPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </DockPanel>

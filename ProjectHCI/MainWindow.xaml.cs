@@ -45,8 +45,17 @@ namespace ProjectHCI
             
             this.DataContext = GridViewModel;
             (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
 
             Spomenici = new ObservableCollection<Spomenik>();
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
+            Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
@@ -81,6 +90,7 @@ namespace ProjectHCI
             var vis = (this.DataContext as GridViewModel).GridForm2Visible;
             
             (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = true;
             this.DataContext = this;
         }
@@ -123,6 +133,25 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
 
+
+        }
+
+        private void ButtonAddClick(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da dodate?",
+                "Confirmation", MessageBoxButton.YesNo);
+            
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Yes code here  
+            }
+            else if(result == MessageBoxResult.No)
+            {
+                // No code here  
+            }  
+            
 
         }
 
