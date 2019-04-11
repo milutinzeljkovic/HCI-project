@@ -99,5 +99,8 @@
   <ItemGroup>
     <Resource Include="mapanovisad.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Monument-logo1.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

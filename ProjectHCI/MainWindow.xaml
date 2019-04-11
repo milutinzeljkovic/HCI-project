@@ -59,9 +59,7 @@
 
 
         <Menu DockPanel.Dock ="Top" Height="50px" Background="#2c5e87" BorderBrush="White" BorderThickness="2px" >
-            <Label Foreground="White">
-                Ovde logo
-            </Label>
+            <Image Source="Monument-logo1.jpg"/>
 
 
 
@@ -259,7 +257,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,100,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,50,400,100" Height="559"  
                Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -269,6 +267,7 @@
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="180px" />
+                    <RowDefinition Height="45px" />
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -297,7 +296,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Margin="25.6,0,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
+                <Button Grid.Row="5" Grid.Column="1" Margin="25.6,0,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Back
                     </Label>
@@ -311,7 +310,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddClick" >
+                <Button Grid.Row="5" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>
@@ -336,7 +335,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,100,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -345,14 +344,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="45px" />
-                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="90px" />
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="45px" />
                     <RowDefinition Height="45px"/>
                     <RowDefinition Height="45px"/>
                     <RowDefinition Height="45px"/>
-                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px"/>
+
                 </Grid.RowDefinitions>
                 <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
@@ -379,17 +379,7 @@
                     </TextBox.Resources>
                 </TextBox>
                 <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="25,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
-                    <TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="10"/>
-                            <Setter Property="BorderBrush" Value="#4288c1"/>
-                            <Setter Property="BorderThickness" Value="5px"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
-                <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,0.4,5.6">Tip:</Label>
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="26,8.2,405.6,7.4" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -399,9 +389,10 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
 
-                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px"  Height="30px" Width="350px" >
+                <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
+
+                <ComboBox Grid.Row="4"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px"  Height="30px" Width="350px" >
                     <ComboBox.Resources>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="Black"/>
@@ -424,8 +415,8 @@
                     <ComboBoxItem>Moderno doba</ComboBoxItem>
 
                 </ComboBox>
-                <Label Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
-                <ComboBox Grid.Row="6"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" >
+                <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
+                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" >
                     <ComboBox.Resources>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="Black"/>
@@ -447,8 +438,19 @@
                 </ComboBox>
 
 
-                <Label Grid.Row="4"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-                <TextBox Grid.Row="4" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Tip:</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -463,12 +465,26 @@
                         Cancel
                     </Label>
                     <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
                         <Style TargetType="{x:Type Border}">
 
                             <Setter Property="CornerRadius" Value="10"/>
                             <Setter Property="BorderBrush" Value="#4288c1"/>
                             <Setter Property="BorderThickness" Value="5px"/>
+                            <Style.Triggers>
+                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                    <Setter Property="Button.Background" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
+
 
                     </Button.Resources>
                 </Button>
