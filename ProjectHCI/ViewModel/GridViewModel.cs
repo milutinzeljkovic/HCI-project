@@ -16,6 +16,8 @@ namespace ProjectHCI.ViewModel
         private bool gridTableVisible = false;
         private bool gridForm2Visible = false;
         private bool gridMapVisible = false;
+        private bool gridEtiketaVisible = false;
+           
 
         private bool gridFormPart2Visible = false;
 
@@ -27,6 +29,22 @@ namespace ProjectHCI.ViewModel
                 NotifyPropertyChanged("GridMapVisible");
             }
         }
+
+        public bool GridEtiketaVisible
+        {
+            get
+            {
+                return gridEtiketaVisible;
+            }
+            set
+            {
+                gridEtiketaVisible = value;
+                NotifyPropertyChanged("GridEtiketaVisible");
+
+            }
+        }
+
+
 
 
 

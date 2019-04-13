@@ -71,7 +71,7 @@ namespace ProjectHCI
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
-
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridFormVisible = true;
             
         }
@@ -88,6 +88,7 @@ namespace ProjectHCI
 
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = true;
 
@@ -101,6 +102,7 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = true;
             this.DataContext = this;
         }
@@ -120,6 +122,24 @@ namespace ProjectHCI
 
             
         }
+
+        private void AddEtiketuClick(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = true;
+
+
+        }
+
+
+
+
         private void ButtonAddSpomenikClik(object sender, RoutedEventArgs e)
         {
             //dodaj ono da li ste sigurni...
@@ -128,6 +148,7 @@ namespace ProjectHCI
 
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = true;
 
 
@@ -141,6 +162,7 @@ namespace ProjectHCI
 
             (this.DataContext as GridViewModel).GridFormVisible = true;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
 
 
