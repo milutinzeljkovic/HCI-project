@@ -31,6 +31,9 @@ namespace ProjectHCI
         private double _test3;
         private string oznaka;
         private Brush color;
+        private string unetiTextIme;
+        private string etiketaOznaka;
+        private string unetiTextOznaka;
 
 
         protected virtual void OnPropertyChanged(string name)
@@ -84,6 +87,14 @@ namespace ProjectHCI
             set;
         }
 
+        public static ObservableCollection<Etiketa> Etikete
+        {
+            get;
+            set;
+        }
+
+        
+
         public MainWindow()
         {
 
@@ -97,6 +108,12 @@ namespace ProjectHCI
             this.DataContext = GridViewModel;
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+
+            Etikete = new ObservableCollection<Etiketa>();
+            Etikete.Add(new Etiketa { Opis = "opis jedne etikete", Oznaka = "oznaka123" });
+            Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
+            Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
+
 
             Spomenici = new ObservableCollection<Spomenik>();
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
@@ -116,6 +133,8 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridFormVisible = true;
 
         }
@@ -160,6 +179,8 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridMapVisible = true;
 
         }
@@ -173,9 +194,33 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = true;
             this.DataContext = this;
         }
+
+        private void PretragaEtiketeClick(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridForm2Visible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridMapVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
+            this.DataContext = this;
+            this.DataContext = GridViewModel;
+            var s = new TabelaEtiketa();
+            s.Show();
+            //tabela spomenika prekrije ovu tabelu
+
+        }
+
+
 
         private void Turtorial_click(object sender, RoutedEventArgs e)
         {
@@ -202,7 +247,26 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = true;
+
+
+        }
+
+        private void AddOznakuClick(object sender, RoutedEventArgs e)
+        {
+            //dodaj ono da li ste sigurni...
+            this.DataContext = GridViewModel;
+            var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
+            (this.DataContext as GridViewModel).GridFormVisible = false;
+            (this.DataContext as GridViewModel).GridForm2Visible = false;
+            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = true;
 
 
         }
@@ -219,8 +283,10 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = true;
-            this.DataContext = this;
+            
 
 
 
@@ -235,6 +301,8 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridFormVisible = true;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+            (this.DataContext as GridViewModel).GridTipVisible = false;
+            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
 
 
@@ -266,11 +334,13 @@ namespace ProjectHCI
         }
         private void lostFocusIme(object sender, EventArgs e)
         {
-
+             unetiTextIme = textBoxIme.Text;
             // do your stuff
             if (textBoxIme.Text == "")
             {
                 textBoxIme.BorderBrush = Brushes.Red;
+                textBoxIme.Text = "Obavezno polje";
+                textBoxIme.Foreground = Brushes.Red;
 
             }
             else
@@ -279,6 +349,15 @@ namespace ProjectHCI
                 textBoxIme.BorderBrush = color;
             }
         }
+
+        private void textBoxImeFocus(object sender, EventArgs e)
+        {
+            textBoxIme.Text = unetiTextIme;
+            textBoxIme.Foreground = Brushes.Black;
+            textBoxIme.BorderBrush = color;
+            
+        }
+
         private void lostFocusTip(object sender, EventArgs e)
         {
 
@@ -296,13 +375,16 @@ namespace ProjectHCI
 
         }
 
+
         private void lostFocusOznaka(object sender, EventArgs e)
         {
-
+            unetiTextOznaka = textBoxOznaka.Text;
             // do your stuff
             if (textBoxOznaka.Text == "")
             {
                 textBoxOznaka.BorderBrush = Brushes.Red;
+                textBoxOznaka.Text = "Obavezno polje";
+                textBoxOznaka.Foreground = Brushes.Red;
 
             }
             else
@@ -310,8 +392,17 @@ namespace ProjectHCI
 
                 textBoxOznaka.BorderBrush = color;
             }
+        }
+
+        private void gotFocusOznaka(object sender, EventArgs e)
+        {
+            textBoxOznaka.Text = unetiTextOznaka;
+            textBoxOznaka.Foreground = Brushes.Black;
+            textBoxOznaka.BorderBrush = color;
 
         }
+
+
 
         private void lostFocusPrihod(object sender, EventArgs e)
         {
@@ -334,16 +425,75 @@ namespace ProjectHCI
                 }
                 else
                 {
+                    textBoxPrihod.Text = "Neispravan unos";
+                    textBoxPrihod.Foreground = Brushes.Red;
                     textBoxPrihod.BorderBrush = Brushes.Red;
                 }
             }
 
         }
+        private void mouseEnter(object sender, EventArgs e)
+        {
+         if(textBoxPrihod.Text== "Neispravan unos")
+            {
+                textBoxPrihod.Text = "";
+            }
+
+        }
+
+        private void gotFocusPrihod(object sender, EventArgs e)
+        {
+            textBoxPrihod.Text = "";
+            textBoxPrihod.Foreground = Brushes.Black;
+            textBoxPrihod.BorderBrush = color;
+
+        }
+
+        private void comboBoxTLostFocus(object sender, EventArgs e)
+        {
+
+            // do your stuff
+
+            if(comboBoxT.SelectedValue == null )
+            {
+                comboBoxT.Background = Brushes.Red;
+            }
+
+        }
+
         private void textBoxPrihodChanged(object sender, EventArgs e)
         {
            
    
         }
+
+
+        private void textBoxEtiketaOznakaLost(object sender, EventArgs e)
+        {
+            etiketaOznaka = textBoxEtiketaOznaka.Text;
+            // do your stuff
+            if (textBoxEtiketaOznaka.Text == "")
+            {
+                textBoxEtiketaOznaka.BorderBrush = Brushes.Red;
+                textBoxEtiketaOznaka.Text = "Obavezno polje";
+                textBoxEtiketaOznaka.Foreground = Brushes.Red;
+
+            }
+            else
+            {
+
+                textBoxEtiketaOznaka.BorderBrush = color;
+            }
+        }
+
+        private void textBoxEtiketaOznakaGot(object sender, EventArgs e)
+        {
+            textBoxEtiketaOznaka.Text = etiketaOznaka;
+            textBoxEtiketaOznaka.Foreground = Brushes.Black;
+            textBoxEtiketaOznaka.BorderBrush = color;
+
+        }
+
 
 
     }

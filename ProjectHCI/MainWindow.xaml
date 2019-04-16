@@ -118,6 +118,28 @@
                 </MenuItem.Resources>
             </MenuItem>
 
+            <MenuItem Header="_Dodaj oznaku" FontSize="15" VerticalAlignment="Center" Click="AddOznakuClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+            <MenuItem Header="_Pretrazi etikete" FontSize="15" VerticalAlignment="Center" Click="PretragaEtiketeClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+
+
 
         </Menu>
 
@@ -244,7 +266,7 @@
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
-                   
+
 
 
                 </Grid>
@@ -254,6 +276,65 @@
 
 
         </DockPanel>
+
+
+        <DockPanel DockPanel.Dock="Left" Width="1265" Visibility="{Binding Path=GridEtiketaTableVisible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
+            <Grid DockPanel.Dock="Left" 
+              Width="1000px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
+               Visibility="{Binding Path=GridEtiketaTableVisible, Converter={StaticResource BoolToVisConverter} }" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400px" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500px"/>
+                    <ColumnDefinition Width="500px"/>
+
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dgrMain1" ItemsSource="{Binding Path=Etikete}" IsReadOnly="True">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Width" Value="100px"/>
+
+                        </Style>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Height" Value="35px"/>
+
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="#4288c1"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="Foreground"  Value="#4288c1"/>
+                            <Setter Property="Height" Value="35px"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#4288c1"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+                    </DataGrid.Resources>
+                </DataGrid>
+            </Grid>
+        </DockPanel>
+
+
+
+
+
+
+
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
@@ -348,7 +429,7 @@
                 <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
 
-                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Name="textBoxEtiketaOznaka" LostFocus="textBoxEtiketaOznakaLost" GotFocus="textBoxEtiketaOznakaGot" Height="30px" Width="350px" >
                     <TextBox.Resources>
 
                         <Style TargetType="{x:Type Border}">
@@ -360,7 +441,8 @@
                     </TextBox.Resources>
                 </TextBox>
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Boja:</Label>
-                <xctk:ColorPicker Grid.Row="1" Name="cp" Grid.Column="1"  Height="30px" DisplayColorAndName="True" Width="350px" AvailableColorsSortingMode="HueSaturationBrightness" Margin="25.8,8.4,405.4,7.2" ></xctk:ColorPicker>                <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
+                <xctk:ColorPicker Grid.Row="1" Name="cp" Grid.Column="1"  Height="30px" DisplayColorAndName="True" Width="350px" AvailableColorsSortingMode="HueSaturationBrightness" Margin="25.8,8.4,405.4,7.2" ></xctk:ColorPicker>
+                <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
                 <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -419,6 +501,125 @@
 
 
 
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridTipVisible, Converter={StaticResource BoolToVisConverter} }">
+            <Grid DockPanel.Dock="Top" 
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
+               Visibility="{Binding Path=GridTipVisible, Converter={StaticResource BoolToVisConverter} }" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="90px" />
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+                </Grid.RowDefinitions>
+                <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
+
+
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                    <TextBox.Resources>
+
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                    <TextBox.Resources>
+
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White" Click="ImageChooseClick" >
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
+
+                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b"  >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
+                        Cancel
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                            <Style.Triggers>
+                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                    <Setter Property="Button.Background" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        Add
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+        </DockPanel>
+
+
+
+
+
 
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0"  Name="panel1"  Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
@@ -426,6 +627,7 @@
               Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -445,7 +647,7 @@
                 <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
 
-                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" LostFocus="lostFocusOznaka" >
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" LostFocus="lostFocusOznaka"  GotFocus="gotFocusOznaka">
 
 
                     <TextBox.Text>
@@ -466,6 +668,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
+                                    
                                 </Grid.ColumnDefinitions>
 
                                 <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
@@ -486,8 +689,10 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
+                <Label Height="30px" Padding="0px" Grid.Column="2" Grid.Row="0" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,7,280.8,8.6" Width="93">label:</Label>
+
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px"  Name="textBoxIme" BorderBrush="#4288c1" Height="30px" Width="350px" LostFocus="lostFocusIme" TextChanged="textImeChanged">
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px" GotFocus="textBoxImeFocus" Name="textBoxIme" BorderBrush="#4288c1" Height="30px" Width="350px" LostFocus="lostFocusIme" TextChanged="textImeChanged">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -495,7 +700,7 @@
                             <Setter Property="BorderThickness" Value="5px"/>
                         </Style>
                     </TextBox.Resources>
-                    
+
                 </TextBox>
                 <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
                 <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
@@ -535,7 +740,7 @@
 
                 </ComboBox>
                 <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
-                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" >
+                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" LostFocus="comboBoxTLostFocus" Name="comboBoxT">
                     <ComboBox.Resources>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="Black"/>
@@ -559,7 +764,7 @@
 
                 <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Tip:</Label>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Test3,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Name="textBoxTip" TextChanged="textBoxPrihodChanged" LostFocus="lostFocusTip" Margin="25.8,5.6,405.8,6"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
-                    
+
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -570,7 +775,7 @@
                 </TextBox>
 
                 <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
-                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" LostFocus="lostFocusPrihod" Name="textBoxPrihod"  >
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod" Name="textBoxPrihod"  >
                     <TextBox.Text>
                         <Binding Path="Test3" UpdateSourceTrigger="PropertyChanged">
 
@@ -603,7 +808,7 @@
                             <Setter Property="BorderThickness" Value="5px"/>
                         </Style>
                     </TextBox.Resources>
-                    
+
 
                 </TextBox>
 
@@ -671,7 +876,7 @@
 
 
 
-
+        
 
 
 
