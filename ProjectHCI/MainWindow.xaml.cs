@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ProjectHCI
 {
@@ -23,16 +24,44 @@ namespace ProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
+        public event PropertyChangedEventHandler PropertyChanged;
         private GridViewModel GridViewModel { get; set; }
         private bool _showPanel;
         private double _test3;
+        private string oznaka;
+        private Brush color;
+
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+
+
+        public string Oznaka
+        {
+            get { return oznaka; }
+            set
+            {
+                if (value != oznaka)
+                {
+                    oznaka = value;
+                    OnPropertyChanged("Oznaka");
+                }
+            }
+        }
+
 
 
 
         public double Test3
         {
-            
+
             get
             {
                 return _test3;
@@ -47,10 +76,7 @@ namespace ProjectHCI
             }
         }
 
-        private void OnPropertyChanged(string v)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public static ObservableCollection<Spomenik> Spomenici
         {
@@ -61,11 +87,13 @@ namespace ProjectHCI
         public MainWindow()
         {
 
-            
+
             InitializeComponent();
+            this.DataContext = this;
+            color = textBoxIme.BorderBrush;
             _showPanel = false;
             GridViewModel = new GridViewModel();
-            
+            Console.WriteLine("asidjsaildjas");
             this.DataContext = GridViewModel;
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
@@ -76,18 +104,20 @@ namespace ProjectHCI
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
-          
+            Oznaka = "oznaka";
+            Test3 = 12321;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
+
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridFormVisible = true;
-            
+
         }
 
         public bool ShowPanel
@@ -116,7 +146,7 @@ namespace ProjectHCI
             {
                 // Open document 
                 string filename = dlg.FileName;
-               
+
             }
 
         }
@@ -138,7 +168,7 @@ namespace ProjectHCI
         {
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridForm2Visible;
-            
+
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
@@ -149,7 +179,7 @@ namespace ProjectHCI
 
         private void Turtorial_click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void ButtonCancelClik(object sender, RoutedEventArgs e)
@@ -160,7 +190,7 @@ namespace ProjectHCI
 
             (this.DataContext as GridViewModel).GridFormVisible = false; ;
 
-            
+
         }
 
         private void AddEtiketuClick(object sender, RoutedEventArgs e)
@@ -190,6 +220,8 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = true;
+            this.DataContext = this;
+
 
 
         }
@@ -213,23 +245,106 @@ namespace ProjectHCI
             //dodaj ono da li ste sigurni...
             MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da dodate?",
                 "Confirmation", MessageBoxButton.YesNo);
-            
+
 
             if (result == MessageBoxResult.Yes)
             {
                 // Yes code here  
             }
-            else if(result == MessageBoxResult.No)
+            else if (result == MessageBoxResult.No)
             {
                 // No code here  
-            }  
-            
+            }
+
 
         }
 
 
+        private void textImeChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void lostFocusIme(object sender, EventArgs e)
+        {
+
+            // do your stuff
+            if (textBoxIme.Text == "")
+            {
+                textBoxIme.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+
+                textBoxIme.BorderBrush = color;
+            }
+        }
+        private void lostFocusTip(object sender, EventArgs e)
+        {
+
+            // do your stuff
+            if (textBoxTip.Text == "")
+            {
+                textBoxTip.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+
+                textBoxTip.BorderBrush = color;
+            }
+
+        }
+
+        private void lostFocusOznaka(object sender, EventArgs e)
+        {
+
+            // do your stuff
+            if (textBoxOznaka.Text == "")
+            {
+                textBoxOznaka.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+
+                textBoxOznaka.BorderBrush = color;
+            }
+
+        }
+
+        private void lostFocusPrihod(object sender, EventArgs e)
+        {
+
+            // do your stuff
+            if (textBoxPrihod.Text == "")
+            {
+                textBoxPrihod.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+                
+                textBoxPrihod.BorderBrush = color;
+                double r;
+                string value = textBoxPrihod.Text;
+                if (double.TryParse(value, out r))
+                {
+                    textBoxPrihod.BorderBrush = color;
+                }
+                else
+                {
+                    textBoxPrihod.BorderBrush = Brushes.Red;
+                }
+            }
+
+        }
+        private void textBoxPrihodChanged(object sender, EventArgs e)
+        {
+           
+   
+        }
+
+
     }
-
-
-
 }

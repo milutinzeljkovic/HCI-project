@@ -69,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlers\TextBoxInputControlers.cs" />
+    <Compile Include="Controlers\ValidationEmptyTextBox.cs" />
     <Compile Include="Controlers\ValidationNumber.cs" />
     <Compile Include="Models\Spomenik.cs" />
     <Compile Include="ViewModel\GridViewModel.cs" />

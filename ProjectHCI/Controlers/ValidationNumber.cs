@@ -22,7 +22,7 @@ namespace ProjectHCI
                     return new ValidationResult(true, null);
                 }
                 
-                return new ValidationResult(false, "Please enter a valid double value.");
+                return new ValidationResult(false, "Invalid input.");
             }
             catch
             {
