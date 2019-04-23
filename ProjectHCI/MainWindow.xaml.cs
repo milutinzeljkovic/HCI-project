@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using ProjectHCI.Controlers;
 
 namespace ProjectHCI
 {
@@ -97,8 +98,6 @@ namespace ProjectHCI
 
         public MainWindow()
         {
-
-
             InitializeComponent();
             this.DataContext = this;
             color = textBoxIme.BorderBrush;
@@ -259,7 +258,6 @@ namespace ProjectHCI
             //dodaj ono da li ste sigurni...
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
@@ -267,8 +265,6 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridTipVisible = true;
-
-
         }
 
 
@@ -279,17 +275,13 @@ namespace ProjectHCI
             //dodaj ono da li ste sigurni...
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
             (this.DataContext as GridViewModel).GridFormVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridTipVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = true;
-            
-
-
-
+         
         }
 
         private void ButtonBackClick(object sender, RoutedEventArgs e)
@@ -297,14 +289,12 @@ namespace ProjectHCI
             //dodaj ono da li ste sigurni...
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
             (this.DataContext as GridViewModel).GridFormVisible = true;
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
             (this.DataContext as GridViewModel).GridTipVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridFormPart2Visible = false;
-
 
         }
 
@@ -314,7 +304,6 @@ namespace ProjectHCI
             MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da dodate?",
                 "Confirmation", MessageBoxButton.YesNo);
 
-
             if (result == MessageBoxResult.Yes)
             {
                 // Yes code here  
@@ -323,12 +312,42 @@ namespace ProjectHCI
             {
                 // No code here  
             }
-
-
         }
 
+		private void AddEtiketuButtonClick(object sender, RoutedEventArgs e)
+		{
+			//validacija unosa
+			//provera username i passworda kod baze
+			//insert u bazu
+			//insert u observalble listu
 
-        private void textImeChanged(object sender, TextChangedEventArgs e)
+			Etiketa etiketa = new Etiketa();
+			EtiketaControler etiketaControler = new EtiketaControler(etiketa);
+			etiketaControler.setEtiketaOznaka(textBoxEtiketaOznaka.Text);
+			etiketaControler.setEtiketaOpis(textBoxEtiketaOpis.Text);
+			etiketaControler.setEtiketaBoja(cp.SelectedColor.ToString());
+			etiketaControler.saveEtiketa();
+
+
+			//ovde napraviti custom dialog za potvrdu dodavanja ili prikaz greske
+			string res = etiketaControler.Result.Equals("greska") ? "Greska prilikom dodavanja, proverite jedinstvenost" : "Uspesno dodata etiketa!";
+			MessageBoxResult result = MessageBox.Show(res,
+				"Confirmation", MessageBoxButton.YesNo);
+
+			if (result == MessageBoxResult.Yes)
+			{
+				// Yes code here  
+			}
+			else if (result == MessageBoxResult.No)
+			{
+				// No code here  
+			}
+
+		}
+
+
+
+		private void textImeChanged(object sender, TextChangedEventArgs e)
         {
 
         }

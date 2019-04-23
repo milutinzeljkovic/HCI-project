@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:helpermethods="using:CoreProject.HelperMethods"
         xmlns:local="clr-namespace:ProjectHCI"
         mc:Ignorable="d"
         
@@ -118,7 +119,7 @@
                 </MenuItem.Resources>
             </MenuItem>
 
-            <MenuItem Header="_Dodaj oznaku" FontSize="15" VerticalAlignment="Center" Click="AddOznakuClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+            <MenuItem Header="_Dodaj tip" FontSize="15" VerticalAlignment="Center" Click="AddOznakuClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
                 <MenuItem.Resources>
                     <Style TargetType="{x:Type Border}">
 
@@ -138,6 +139,38 @@
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
+            <MenuItem Header="_Pretrazi tipove" FontSize="15" VerticalAlignment="Center" Click="PretragaEtiketeClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+            <MenuItem Header="_Izmeni etikete" FontSize="15" VerticalAlignment="Center" Click="AddEtiketuClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+            <MenuItem Header="_Izmeni tip" FontSize="15" VerticalAlignment="Center" Click="AddOznakuClick"  Foreground="#4288c1" Height="50px"  BorderBrush="#4288c1" Margin="5,15,5.4,-5">
+                <MenuItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="BorderBrush" Value="#4288c1"/>
+                        <Setter Property="BorderThickness" Value="5px"/>
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+
+            
 
 
 
@@ -443,7 +476,7 @@
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Boja:</Label>
                 <xctk:ColorPicker Grid.Row="1" Name="cp" Grid.Column="1"  Height="30px" DisplayColorAndName="True" Width="350px" AvailableColorsSortingMode="HueSaturationBrightness" Margin="25.8,8.4,405.4,7.2" ></xctk:ColorPicker>
                 <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px" Name="textBoxEtiketaOpis">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -481,7 +514,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" >
+                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA" Click="AddEtiketuButtonClick"  VerticalAlignment="Top"  >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>
@@ -649,36 +682,6 @@
 
                 <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" LostFocus="lostFocusOznaka"  GotFocus="gotFocusOznaka">
 
-
-                    <TextBox.Text>
-                        <Binding Path="Oznaka" UpdateSourceTrigger="PropertyChanged"  >
-
-                            <Binding.ValidationRules>
-                                <local:ValidationEmptyTextBox ValidationStep="ConvertedProposedValue"/>
-
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <ControlTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                    
-                                </Grid.ColumnDefinitions>
-
-                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Validation.ErrorTemplate>
-
-
-
                     <TextBox.Resources>
 
                         <Style TargetType="{x:Type Border}">
@@ -776,31 +779,7 @@
 
                 <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
                 <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod" Name="textBoxPrihod"  >
-                    <TextBox.Text>
-                        <Binding Path="Test3" UpdateSourceTrigger="PropertyChanged">
-
-                            <Binding.ValidationRules>
-                                <local:ValidationNumber ValidationStep="ConvertedProposedValue"/>
-
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <ControlTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Validation.ErrorTemplate>
+                    
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
