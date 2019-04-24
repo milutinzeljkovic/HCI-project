@@ -1,0 +1,21 @@
+﻿<Window x:Class="ProjectHCI.ListViewTipovi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectHCI"
+        mc:Ignorable="d"
+        Title="ListViewTipovi" Height="200" Width="455">
+    <Grid>
+        <ListView Margin="10" Name="lvUsers">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime" Width="120" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Opis" Width="100" DisplayMemberBinding="{Binding Opis}" />
+                    <GridViewColumn Header="Oznaka" Width="100" DisplayMemberBinding="{Binding Oznaka}" />
+                    <GridViewColumn Header="Slika" Width="100" DisplayMemberBinding="{Binding Icon}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

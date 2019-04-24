@@ -170,7 +170,7 @@
                 </MenuItem.Resources>
             </MenuItem>
 
-            
+
 
 
 
@@ -386,17 +386,22 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >UNESCO:</Label>
-                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
-                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="unesco">Da</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="unesco">Ne</RadioButton>
 
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Naseljeno met:</Label>
-                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1">Da</RadioButton>
-                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1">Ne</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="naseljeno mesto">Da</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="naseljeno mesto">Ne</RadioButton>
+
+                <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Obradjen:</Label>
+                <CheckBox Grid.Row="4" Grid.Column="1" Margin="25.8,12.2,705.8,12.6">Da</CheckBox>
+
+
                 <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
                 <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
                 Name="calendar1" VerticalAlignment="Top" Width="180" />
                 <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
-                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White" Click="ImageChooseClick" >
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White"  Name="btnDodajIkonicu">
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi
                     </Label>
@@ -424,7 +429,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddClick" >
+                <Button Grid.Row="5" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA"  Name="btnAddSpomenikClick">
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>
@@ -552,7 +557,7 @@
                 <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
 
-                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textboxOznakaTip" >
                     <TextBox.Resources>
 
                         <Style TargetType="{x:Type Border}">
@@ -564,7 +569,7 @@
                     </TextBox.Resources>
                 </TextBox>
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textboxImeTip" >
                     <TextBox.Resources>
 
                         <Style TargetType="{x:Type Border}">
@@ -576,7 +581,7 @@
                     </TextBox.Resources>
                 </TextBox>
                 <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px" Name="textboxOpisTip">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -587,7 +592,7 @@
                 </TextBox>
 
                 <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
-                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White" Click="ImageChooseClick" >
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White" Name="buttonIkonicaTip" >
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi
                     </Label>
@@ -603,7 +608,7 @@
                 </Button>
 
 
-                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b"  >
+                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Name="buttonCancelTip" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Cancel
                     </Label>
@@ -631,7 +636,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" >
+                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" Name="buttonAddTip" Click="buttonAddTipClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>
@@ -657,7 +662,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0"  Name="panel1"  Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" Name="grid1"
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="42,50,300,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -766,7 +771,22 @@
 
 
                 <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Tip:</Label>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Test3,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Name="textBoxTip" TextChanged="textBoxPrihodChanged" LostFocus="lostFocusTip" Margin="25.8,5.6,405.8,6"  BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" >
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="294.8,7.4,406.8,8.2" RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirTip" >
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="24.8,7.4,491.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod"   >
 
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -775,11 +795,13 @@
                             <Setter Property="BorderThickness" Value="5px"/>
                         </Style>
                     </TextBox.Resources>
+
+
                 </TextBox>
 
                 <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
                 <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod" Name="textBoxPrihod"  >
-                    
+
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -790,6 +812,23 @@
 
 
                 </TextBox>
+
+                <Label Grid.Row="7"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Etikete:</Label>
+                <Button Grid.Row="7" Grid.Column="1" Height="30px" Width="80px" Margin="25.8,6,675.8,9.6" RenderTransformOrigin="0.231,0.307" Background="White" Name="btnDodajEtiketu" >
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Dodaj
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
 
                 <Button Grid.Row="8" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonCancelClik" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
@@ -855,7 +894,7 @@
 
 
 
-        
+
 
 
 

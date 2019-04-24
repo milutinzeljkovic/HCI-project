@@ -8,9 +8,9 @@ using ProjectHCI.Models;
 
 namespace ProjectHCI.Controlers
 {
-    class EtiketaControler
-    {
-		private Etiketa etiketa;
+	class TipControler
+	{
+		private Tip tip;
 		private string result;
 
 		public String Result
@@ -19,28 +19,33 @@ namespace ProjectHCI.Controlers
 			set;
 		}
 
-		public EtiketaControler(Etiketa etiketa)
+		public TipControler(Tip tip)
 		{
-			this.etiketa = etiketa;
+			this.tip = tip;
 		}
 
-		public void setEtiketaOznaka(String oznaka)
+		public void setTipIme(string ime)
 		{
-			etiketa.Oznaka = oznaka;
-		}
-		public void setEtiketaBoja(string boja)
-		{
-			etiketa.Boja = boja;
-
-		}
-		public void setEtiketaOpis(string opis)
-		{
-			etiketa.Opis = opis;
+			tip.Ime = ime;
 		}
 
-		public void saveEtiketa()
+		public void setTipOznaka(String oznaka)
 		{
-			
+			tip.Oznaka = oznaka;
+		}
+		
+		public void setTipOpis(string opis)
+		{
+			tip.Opis = opis;
+		}
+		public void setTipImg(string img)
+		{
+			tip.Icon = img;
+		}
+
+		public void saveTip()
+		{
+
 			var dbCon = DBConnection.Instance();
 			//
 			//
@@ -49,9 +54,9 @@ namespace ProjectHCI.Controlers
 			//
 			if (dbCon.IsConnect())
 			{
-				try { 
-					//suppose col0 and col1 are defined as VARCHAR in the DB
-					string query = "INSERT INTO radno_vreme_uC.hci_oznaka_table (id_oznaka, opis, boja) VALUES ('"+etiketa.Oznaka+"','"+etiketa.Opis+"','"+etiketa.Boja+"')";
+				try
+				{
+					string query = "INSERT INTO radno_vreme_uC.hci_test_tabelatipoca (oznaka, ime, opis, slika) VALUES ('" + tip.Oznaka + "','" + tip.Ime + "','" + tip.Opis + "','" + tip.Icon + "')";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
 
 					cmd.ExecuteNonQuery();
@@ -67,15 +72,13 @@ namespace ProjectHCI.Controlers
 				{
 					dbCon.Close();
 				}
-				
-				
+
+
 			}
 		}
 		public void updateView()
 		{
-			
-		}
-		
 
-    }
+		}
+	}
 }

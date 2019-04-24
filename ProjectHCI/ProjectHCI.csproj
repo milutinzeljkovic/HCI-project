@@ -85,12 +85,24 @@
     </ApplicationDefinition>
     <Compile Include="Controlers\DBConnection.cs" />
     <Compile Include="Controlers\EtiketaControler.cs" />
+    <Compile Include="Controlers\TipControler.cs" />
+    <Compile Include="EventHandlers\FormDodajSpomenikHandlers.cs" />
+    <Compile Include="EventHandlers\FormDodajTipHandlers.cs" />
+    <Compile Include="ListViewTipovi.xaml.cs">
+      <DependentUpon>ListViewTipovi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Etiketa.cs" />
+    <Compile Include="Models\Monument.cs" />
     <Compile Include="Models\Spomenik.cs" />
+    <Compile Include="Models\Tip.cs" />
     <Compile Include="TabelaEtiketa.xaml.cs">
       <DependentUpon>TabelaEtiketa.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\GridViewModel.cs" />
+    <Page Include="ListViewTipovi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

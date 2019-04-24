@@ -5,19 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectHCI"
         mc:Ignorable="d"
-        Title="TabelaEtiketa" Height="500" Width="800">
+        Title="TabelaEtiketa" Height="496.4" Width="1033.2">
     <DockPanel DockPanel.Dock="Left" Width="1265" >
         <Grid DockPanel.Dock="Left" 
-              Width="1000px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  >
+              Width="1000px"  VerticalAlignment="Stretch" Height="450px" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  >
             <Grid.RowDefinitions>
-                <RowDefinition Height="400px" />
+                <RowDefinition Height="350px" />
+                <RowDefinition Height="100px" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500px"/>
-                
+                <ColumnDefinition Width="50px"/>
+
 
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgrMain1" ItemsSource="{Binding Path=Etikete}" IsReadOnly="True" Margin="-10,-70,10,70">
+            <DataGrid x:Name="dgrMain1" ItemsSource="{Binding Path=Etikete}" IsReadOnly="True" Margin="-10,-70,10,70"
+                      SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+
                 <DataGrid.Resources>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderBrush" Value="White"/>
@@ -52,7 +56,10 @@
                     </Style>
 
                 </DataGrid.Resources>
+                
             </DataGrid>
+            <Button Margin="0,280,448.8,55" Background="Aqua" Click="dodajEtiketu">asdasi</Button>
+
         </Grid>
     </DockPanel>
 </Window>

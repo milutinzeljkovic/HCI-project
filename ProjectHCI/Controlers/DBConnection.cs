@@ -10,12 +10,14 @@ namespace ProjectHCI.Controlers
 	{
 		private DBConnection()
 		{
+			isConnected = false;
 		}
 
 		private string databaseName = string.Empty;
 		private string username = string.Empty;
 		private string password = string.Empty;
 		private string server = string.Empty;
+		private bool isConnected;
 
 		public string DatabaseName
 		{
@@ -43,13 +45,14 @@ namespace ProjectHCI.Controlers
 
 		public bool IsConnect()
 		{
-			if (Connection == null)
+			if (isConnected == false)
 			{
 				if (String.IsNullOrEmpty(databaseName))
 					return false;
 
 				string connstring = string.Format("Server="+Server+"; database={0}; UID=" + Username + "; password=" + Password, databaseName);
 				connection = new MySql.Data.MySqlClient.MySqlConnection(connstring);
+				isConnected = true;
 				connection.Open();
 			}
 
@@ -59,6 +62,8 @@ namespace ProjectHCI.Controlers
 		public void Close()
 		{
 			connection.Close();
+			isConnected = false;
+			
 		}
 	}
 }

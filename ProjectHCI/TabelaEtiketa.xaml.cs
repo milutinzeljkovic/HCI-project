@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProjectHCI.EventHandlers;
 
 namespace ProjectHCI
 {
@@ -21,7 +22,26 @@ namespace ProjectHCI
     /// </summary>
     public partial class TabelaEtiketa : Window
     {
-        public static ObservableCollection<Etiketa> Etikete
+		private Etiketa etiketa;
+
+		public Etiketa SelectedItem
+		{
+			get { return etiketa; }
+			set
+			{
+				etiketa = value;
+				
+				
+			}
+		}
+		private void dodajEtiketu(object sender, RoutedEventArgs e)
+		{
+
+			FormDodajSpomenikHandlers.Etikete.Add(SelectedItem);
+		}
+
+
+		public static ObservableCollection<Etiketa> Etikete
         {
             get;
             set;
@@ -41,5 +61,8 @@ namespace ProjectHCI
             Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
             Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
         }
+
+		
+
     }
 }

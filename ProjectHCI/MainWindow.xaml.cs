@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ProjectHCI.Controlers;
+using ProjectHCI.EventHandlers;
 
 namespace ProjectHCI
 {
@@ -29,8 +30,6 @@ namespace ProjectHCI
         public event PropertyChangedEventHandler PropertyChanged;
         private GridViewModel GridViewModel { get; set; }
         private bool _showPanel;
-        private double _test3;
-        private string oznaka;
         private Brush color;
         private string unetiTextIme;
         private string etiketaOznaka;
@@ -47,38 +46,7 @@ namespace ProjectHCI
 
 
 
-        public string Oznaka
-        {
-            get { return oznaka; }
-            set
-            {
-                if (value != oznaka)
-                {
-                    oznaka = value;
-                    OnPropertyChanged("Oznaka");
-                }
-            }
-        }
-
-
-
-
-        public double Test3
-        {
-
-            get
-            {
-                return _test3;
-            }
-            set
-            {
-                if (value != _test3)
-                {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
-                }
-            }
-        }
+     
 
 
 
@@ -99,7 +67,19 @@ namespace ProjectHCI
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+
+			FormDodajSpomenikHandlers formDodajSpomenikHandlers = new FormDodajSpomenikHandlers();
+			btnOdabirTip.Click += formDodajSpomenikHandlers.click_event_odabirtipa;
+			btnDodajEtiketu.Click += formDodajSpomenikHandlers.click_event_dodajetiketu;
+			btnDodajIkonicu.Click += formDodajSpomenikHandlers.click_event_imagechoose;
+			btnAddSpomenikClick.Click += (new FormDodajSpomenikHandlers.DodavanjeSpomenika(null)).click_event_dodajSpomenik;
+
+
+			FormDodajTipHandlers formDodajTipHandlers = new FormDodajTipHandlers();
+			buttonIkonicaTip.Click += formDodajTipHandlers.click_event_imagechoose;
+			
+
+			this.DataContext = this;
             color = textBoxIme.BorderBrush;
             _showPanel = false;
             GridViewModel = new GridViewModel();
@@ -120,15 +100,14 @@ namespace ProjectHCI
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
             Spomenici.Add(new Spomenik { Ime = "Spomenik1", Opis = "opis", Era = "paleolit", Oznaka = "oznak", Unesco = "unesco" });
-            Oznaka = "oznaka";
-            Test3 = 12321;
+            
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
+			
             (this.DataContext as GridViewModel).GridForm2Visible = false;
             (this.DataContext as GridViewModel).GridMapVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaVisible = false;
@@ -144,30 +123,7 @@ namespace ProjectHCI
         }
 
 
-        private void ImageChooseClick(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
-            {
-                // Open document 
-                string filename = dlg.FileName;
-
-            }
-
-        }
+        
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
@@ -298,21 +254,7 @@ namespace ProjectHCI
 
         }
 
-        private void ButtonAddClick(object sender, RoutedEventArgs e)
-        {
-            //dodaj ono da li ste sigurni...
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da dodate?",
-                "Confirmation", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                // Yes code here  
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                // No code here  
-            }
-        }
+        
 
 		private void AddEtiketuButtonClick(object sender, RoutedEventArgs e)
 		{
@@ -345,6 +287,18 @@ namespace ProjectHCI
 
 		}
 
+		private void buttonAddTipClick(object sender, RoutedEventArgs e)
+		{
+			Dictionary<string, string> dictionary = new Dictionary<string, string>();
+			dictionary.Add("oznaka", textboxOznakaTip.Text);
+			dictionary.Add("opis", textboxOpisTip.Text);
+			dictionary.Add("ime", textboxImeTip.Text);
+			(new FormDodajTipHandlers()).dodajTip(dictionary);
+
+
+
+
+		}
 
 
 		private void textImeChanged(object sender, TextChangedEventArgs e)
@@ -377,22 +331,7 @@ namespace ProjectHCI
             
         }
 
-        private void lostFocusTip(object sender, EventArgs e)
-        {
 
-            // do your stuff
-            if (textBoxTip.Text == "")
-            {
-                textBoxTip.BorderBrush = Brushes.Red;
-
-            }
-            else
-            {
-
-                textBoxTip.BorderBrush = color;
-            }
-
-        }
 
 
         private void lostFocusOznaka(object sender, EventArgs e)
