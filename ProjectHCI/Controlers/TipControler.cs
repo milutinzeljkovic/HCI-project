@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using ProjectHCI.Models;
+using ProjectHCI.DBCredentials;
 
 namespace ProjectHCI.Controlers
 {
@@ -46,12 +47,12 @@ namespace ProjectHCI.Controlers
 		public void saveTip()
 		{
 
+			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
-			//
-			//
-			//
-			//
-			//
+			dbCon.DatabaseName = db.Database;
+			dbCon.Username = db.Username;
+			dbCon.Server = db.Server;
+			dbCon.Password = "";
 			if (dbCon.IsConnect())
 			{
 				try
@@ -76,6 +77,53 @@ namespace ProjectHCI.Controlers
 
 			}
 		}
+
+		public static List<Tip> fetchTip()
+		{
+			DBCredential db = DBCredential.Instance();
+			var dbCon = DBConnection.Instance();
+			dbCon.DatabaseName = db.Database;
+			dbCon.Username = db.Username;
+			dbCon.Server = db.Server;
+			dbCon.Password = "";
+
+			List<Tip> tipovi = new List<Tip>();
+
+			if(dbCon.IsConnect())
+			{
+				try
+				{
+					string query = "SELECT * FROM radno_vreme_uC.hci_test_tabelatipoca";
+					var cmd = new MySqlCommand(query, dbCon.Connection);
+					var reader = cmd.ExecuteReader();
+					
+					Console.WriteLine(reader);
+					while (reader.Read())
+					{
+						
+						tipovi.Add(new Tip(){Oznaka = reader.GetString("oznaka"), Ime = reader.GetString("ime"), Opis = reader.GetString("opis"), Icon = reader.GetString("slika") });
+						
+
+					}
+					dbCon.Close();
+					return tipovi;
+
+
+				}
+				catch(MySqlException e)
+				{
+					Console.WriteLine("greska");
+				}
+				finally
+				{
+					dbCon.Close();
+				}
+			}
+			return tipovi;
+
+		}
+
+
 		public void updateView()
 		{
 

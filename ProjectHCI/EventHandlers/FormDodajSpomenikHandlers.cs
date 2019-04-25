@@ -54,7 +54,7 @@ namespace ProjectHCI.EventHandlers
 
 		private static void DodajEtiketu(object sender, RoutedEventArgs e)
 		{
-			var s = new TabelaEtiketa();
+			var s = new ListViewEtikete();
 
 			s.Show();
 			

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using ProjectHCI.Models;
+using ProjectHCI.DBCredentials;
 
 namespace ProjectHCI.Controlers
 {
@@ -41,12 +42,12 @@ namespace ProjectHCI.Controlers
 		public void saveEtiketa()
 		{
 			
+			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
-			//
-			//
-			//
-			//
-			//
+			dbCon.DatabaseName = db.Database;
+			dbCon.Username = db.Username;
+			dbCon.Server = db.Server;
+			dbCon.Password = "";
 			if (dbCon.IsConnect())
 			{
 				try { 
@@ -71,6 +72,54 @@ namespace ProjectHCI.Controlers
 				
 			}
 		}
+
+		public static List<Etiketa> fetchEtikete()
+		{
+			DBCredential db = DBCredential.Instance();
+			var dbCon = DBConnection.Instance();
+			dbCon.DatabaseName = db.Database;
+			dbCon.Username = db.Username;
+			dbCon.Server = db.Server;
+			dbCon.Password = "";
+
+			List<Etiketa> etikete = new List<Etiketa>();
+
+			if (dbCon.IsConnect())
+			{
+				try
+				{
+					string query = "SELECT * FROM radno_vreme_uC.hci_oznaka_table";
+					var cmd = new MySqlCommand(query, dbCon.Connection);
+					var reader = cmd.ExecuteReader();
+
+					Console.WriteLine(reader);
+					while (reader.Read())
+					{
+
+						etikete.Add(new Etiketa() { Oznaka = reader.GetString("id_oznaka"), Opis = reader.GetString("opis"), Boja = reader.GetString("boja") });
+
+
+					}
+					dbCon.Close();
+					return etikete;
+
+
+				}
+				catch (MySqlException e)
+				{
+					Console.WriteLine("greska");
+				}
+				finally
+				{
+					dbCon.Close();
+				}
+			}
+			return etikete;
+
+		}
+
+
+
 		public void updateView()
 		{
 			

@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ProjectHCI.Controlers;
 using ProjectHCI.EventHandlers;
+using ProjectHCI.DBCredentials;
 
 namespace ProjectHCI
 {
@@ -67,7 +68,7 @@ namespace ProjectHCI
         public MainWindow()
         {
             InitializeComponent();
-
+			
 			FormDodajSpomenikHandlers formDodajSpomenikHandlers = new FormDodajSpomenikHandlers();
 			btnOdabirTip.Click += formDodajSpomenikHandlers.click_event_odabirtipa;
 			btnDodajEtiketu.Click += formDodajSpomenikHandlers.click_event_dodajetiketu;
@@ -294,11 +295,11 @@ namespace ProjectHCI
 			dictionary.Add("opis", textboxOpisTip.Text);
 			dictionary.Add("ime", textboxImeTip.Text);
 			(new FormDodajTipHandlers()).dodajTip(dictionary);
-
-
-
-
 		}
+
+
+
+
 
 
 		private void textImeChanged(object sender, TextChangedEventArgs e)

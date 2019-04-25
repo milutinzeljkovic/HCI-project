@@ -17,19 +17,16 @@ using ProjectHCI.Controlers;
 namespace ProjectHCI
 {
 	/// <summary>
-	/// Interaction logic for ListViewTipovi.xaml
+	/// Interaction logic for ListViewEtikete.xaml
 	/// </summary>
-	public partial class ListViewTipovi : Window
+	public partial class ListViewEtikete : Window
 	{
-		
-		public ListViewTipovi()
+		public ListViewEtikete()
 		{
 			InitializeComponent();
-			List<Tip> items = TipControler.fetchTip();
-			
+			List<Etiketa> items = EtiketaControler.fetchEtikete();
+
 			lvUsers.ItemsSource = items;
 		}
 	}
-
-	
 }
