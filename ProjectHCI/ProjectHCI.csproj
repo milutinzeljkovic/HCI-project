@@ -86,10 +86,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlers\AddEtiketuController.cs" />
+    <Compile Include="Controlers\Controller.cs" />
+    <Compile Include="Controlers\ControllerFactory.cs" />
     <Compile Include="Controlers\DBConnection.cs" />
     <Compile Include="Controlers\EtiketaControler.cs" />
     <Compile Include="Controlers\TipControler.cs" />
     <Compile Include="DBCredentials\DBCredentials.cs" />
+    <Compile Include="EtiketaObserver.cs" />
     <Compile Include="EventHandlers\FormDodajSpomenikHandlers.cs" />
     <Compile Include="EventHandlers\FormDodajTipHandlers.cs" />
     <Compile Include="ListViewEtikete.xaml.cs">
@@ -102,10 +106,26 @@
     <Compile Include="Models\Monument.cs" />
     <Compile Include="Models\Spomenik.cs" />
     <Compile Include="Models\Tip.cs" />
+    <Compile Include="Observer.cs" />
+    <Compile Include="Observers\App.cs" />
+    <Compile Include="Observers\MainObserver.cs" />
+    <Compile Include="Observers\MainPageObserver.cs" />
+    <Compile Include="Observers\SideBarObserver.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="TabelaEtiketa.xaml.cs">
       <DependentUpon>TabelaEtiketa.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\GridViewModel.cs" />
+    <Compile Include="TipObserver.cs" />
+    <Compile Include="DBCredentials\ViewModel\GridViewModel.cs" />
+    <Compile Include="ViewHandlers\FirstPage.cs" />
+    <Compile Include="ViewHandlers\FormEtiketa.cs" />
+    <Compile Include="ViewHandlers\FormSpomenik.cs" />
+    <Compile Include="ViewHandlers\FormTip.cs" />
+    <Compile Include="ViewHandlers\NeuspesnoEtiketaHandler.cs" />
+    <Compile Include="ViewHandlers\SideBarHandler.cs" />
+    <Compile Include="ViewHandlers\UspesnoEtiketa.cs" />
+    <Compile Include="ViewHandlers\ViewHandler.cs" />
+    <Compile Include="ViewHandlers\ViewHandlerFactoty.cs" />
     <Page Include="ListViewEtikete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +185,7 @@
   <ItemGroup>
     <Resource Include="Monument-logo1.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
 </Project>

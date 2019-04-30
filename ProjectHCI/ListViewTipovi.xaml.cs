@@ -28,7 +28,22 @@ namespace ProjectHCI
 			List<Tip> items = TipControler.fetchTip();
 			
 			lvUsers.ItemsSource = items;
+
+			
+
 		}
+
+		void odabir(object sender, RoutedEventArgs e)
+		{
+			String prikaz = lvUsers.SelectedItem == null ? "" : ((Tip)lvUsers.SelectedItem).Ime;
+			Console.WriteLine("klik odabir "+prikaz);
+			Subject instance = Subject.Instance();
+			Console.WriteLine(instance.observers.Count());
+			instance.TipState = prikaz;
+		}
+
+
+
 	}
 
 	

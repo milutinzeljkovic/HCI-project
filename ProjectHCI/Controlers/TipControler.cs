@@ -52,13 +52,15 @@ namespace ProjectHCI.Controlers
 			dbCon.DatabaseName = db.Database;
 			dbCon.Username = db.Username;
 			dbCon.Server = db.Server;
-			dbCon.Password = "";
+			dbCon.Password = "wU17KVpis3";
 			if (dbCon.IsConnect())
 			{
 				try
 				{
-					string query = "INSERT INTO radno_vreme_uC.hci_test_tabelatipoca (oznaka, ime, opis, slika) VALUES ('" + tip.Oznaka + "','" + tip.Ime + "','" + tip.Opis + "','" + tip.Icon + "')";
+					//string query = "INSERT INTO radno_vreme_uC.hci_test_tabelatipoca (oznaka, ime, opis, slika) VALUES ('" + tip.Oznaka + "','" + tip.Ime + "','" + tip.Opis + "','" + tip.Icon + "')";
+					string query = "INSERT INTO hci_tip_table (oznaka, ime, opis, slika) VALUES ('" + tip.Oznaka + "','" + tip.Ime + "','" + tip.Opis + "','" + tip.Icon + "')";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
+
 
 					cmd.ExecuteNonQuery();
 
@@ -85,7 +87,7 @@ namespace ProjectHCI.Controlers
 			dbCon.DatabaseName = db.Database;
 			dbCon.Username = db.Username;
 			dbCon.Server = db.Server;
-			dbCon.Password = "";
+			dbCon.Password = "wU17KVpis3";
 
 			List<Tip> tipovi = new List<Tip>();
 
@@ -93,7 +95,7 @@ namespace ProjectHCI.Controlers
 			{
 				try
 				{
-					string query = "SELECT * FROM radno_vreme_uC.hci_test_tabelatipoca";
+					string query = "SELECT * FROM hci_tip_table";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
 					var reader = cmd.ExecuteReader();
 					

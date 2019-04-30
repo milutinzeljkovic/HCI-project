@@ -47,12 +47,14 @@ namespace ProjectHCI.Controlers
 			dbCon.DatabaseName = db.Database;
 			dbCon.Username = db.Username;
 			dbCon.Server = db.Server;
-			dbCon.Password = "";
+			dbCon.Password = "wU17KVpis3";
 			if (dbCon.IsConnect())
 			{
 				try { 
 					//suppose col0 and col1 are defined as VARCHAR in the DB
-					string query = "INSERT INTO radno_vreme_uC.hci_oznaka_table (id_oznaka, opis, boja) VALUES ('"+etiketa.Oznaka+"','"+etiketa.Opis+"','"+etiketa.Boja+"')";
+					//string query = "INSERT INTO radno_vreme_uC.hci_oznaka_table (id_oznaka, opis, boja) VALUES ('"+etiketa.Oznaka+"','"+etiketa.Opis+"','"+etiketa.Boja+"')";
+					string query = "INSERT INTO hci_etiketa_table (id_oznaka, opis, boja) VALUES ('" + etiketa.Oznaka + "','" + etiketa.Opis + "','" + etiketa.Boja + "')";
+
 					var cmd = new MySqlCommand(query, dbCon.Connection);
 
 					cmd.ExecuteNonQuery();
@@ -80,7 +82,7 @@ namespace ProjectHCI.Controlers
 			dbCon.DatabaseName = db.Database;
 			dbCon.Username = db.Username;
 			dbCon.Server = db.Server;
-			dbCon.Password = "";
+			dbCon.Password = "wU17KVpis3";
 
 			List<Etiketa> etikete = new List<Etiketa>();
 
@@ -88,7 +90,7 @@ namespace ProjectHCI.Controlers
 			{
 				try
 				{
-					string query = "SELECT * FROM radno_vreme_uC.hci_oznaka_table";
+					string query = "SELECT * FROM hci_etiketa_table";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
 					var reader = cmd.ExecuteReader();
 

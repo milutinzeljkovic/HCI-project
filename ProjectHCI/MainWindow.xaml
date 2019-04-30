@@ -64,7 +64,6 @@
             <Image Source="Monument-logo1.jpg"/>
 
 
-
         </Menu>
 
 
@@ -78,7 +77,7 @@
                     <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem  Header="_Dodaj spomenik" FontSize="15"  Click="Add_Click" Foreground="#4288c1" Height="50px"  Background="white" BorderBrush="#4288c1" Margin="5,5,5,5">
+            <MenuItem  Header="_Dodaj spomenik" FontSize="15"  Click="Add_Click" Name="dodaj_spomenik" Foreground="#4288c1" Height="50px"  Background="white" BorderBrush="#4288c1" Margin="5,5,5,5">
                 <MenuItem.Resources>
                     <Style TargetType="{x:Type Border}">
 
@@ -176,9 +175,9 @@
 
         </Menu>
 
-        <DockPanel DockPanel.Dock="Left" Width="1265" Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
+        <DockPanel DockPanel.Dock="Left" Width="1265" Name="spomenik_edit" Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
             <Grid DockPanel.Dock="Left" 
-              Width="1000px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
+              Width="1000px"  VerticalAlignment="Stretch" Name="spomenik_edit_grid" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
                Visibility="{Binding Path=GridForm2Visible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="400px" />
@@ -311,9 +310,9 @@
         </DockPanel>
 
 
-        <DockPanel DockPanel.Dock="Left" Width="1265" Visibility="{Binding Path=GridEtiketaTableVisible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
+        <DockPanel DockPanel.Dock="Left" Width="1265" Name="table_etiketa" Visibility="{Binding Path=GridEtiketaTableVisible, Converter={StaticResource BoolToVisConverter} }" Margin="0,0.4" >
             <Grid DockPanel.Dock="Left" 
-              Width="1000px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
+              Width="1000px"  VerticalAlignment="Stretch" Name="table_etiketa_grid" HorizontalAlignment="Stretch" Margin="-200,100,-10.4,71"  
                Visibility="{Binding Path=GridEtiketaTableVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="400px" />
@@ -369,9 +368,9 @@
 
 
 
-        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }">
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Name="form_spomenik2" Margin="0,0,0,0" Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100,50,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" Name="form_spomenik2_grid" HorizontalAlignment="Stretch" Margin="100,50,400,100" Height="559"  
                Visibility="{Binding Path=GridFormPart2Visible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -449,9 +448,9 @@
 
         </DockPanel>
 
-        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridEtiketaVisible, Converter={StaticResource BoolToVisConverter} }">
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Name="form_etiketa" Margin="0,0,0,0" Visibility="{Binding Path=GridEtiketaVisible, Converter={StaticResource BoolToVisConverter} }">
             <Grid DockPanel.Dock="Top" 
-              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
+              Width="500px"  VerticalAlignment="Stretch" Name="form_etiketa_grid" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
                Visibility="{Binding Path=GridEtiketaVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -491,7 +490,7 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b"  >
+                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b"  Click="etiketaCancel">
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Cancel
                     </Label>
@@ -539,8 +538,8 @@
 
 
 
-        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Visibility="{Binding Path=GridTipVisible, Converter={StaticResource BoolToVisConverter} }">
-            <Grid DockPanel.Dock="Top" 
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0" Name="form_tip" Visibility="{Binding Path=GridTipVisible, Converter={StaticResource BoolToVisConverter} }">
+            <Grid DockPanel.Dock="Top" Name="form_tip_grid"
               Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="145,50,400,100" Height="559"  
                Visibility="{Binding Path=GridTipVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
@@ -608,7 +607,7 @@
                 </Button>
 
 
-                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Name="buttonCancelTip" >
+                <Button Grid.Row="4" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="tipCancel" Name="buttonCancelTip" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Cancel
                     </Label>
@@ -660,8 +659,8 @@
 
 
 
-        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0"  Name="panel1"  Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
-            <Grid DockPanel.Dock="Top" Name="grid1"
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0"  Name="spomenik_form"  Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }">
+            <Grid DockPanel.Dock="Top" Name="spomenik_form_grid"
               Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="42,50,300,100" Height="559"  
                Visibility="{Binding Path=GridFormVisible, Converter={StaticResource BoolToVisConverter} }" >
                 <Grid.ColumnDefinitions>
@@ -685,7 +684,7 @@
                 <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
 
 
-                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" LostFocus="lostFocusOznaka"  GotFocus="gotFocusOznaka">
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" LostFocus="lostFocusOznaka"  GotFocus="gotFocusOznaka" TextChanged="textChanged">
 
                     <TextBox.Resources>
 
@@ -700,7 +699,7 @@
                 <Label Height="30px" Padding="0px" Grid.Column="2" Grid.Row="0" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,7,280.8,8.6" Width="93">label:</Label>
 
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px" GotFocus="textBoxImeFocus" Name="textBoxIme" BorderBrush="#4288c1" Height="30px" Width="350px" LostFocus="lostFocusIme" TextChanged="textImeChanged">
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px" GotFocus="textBoxImeFocus" Name="textBoxIme" BorderBrush="#4288c1" Height="30px" Width="350px" LostFocus="lostFocusIme" TextChanged="textChanged" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -711,7 +710,7 @@
 
                 </TextBox>
                 <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" BorderBrush="#4288c1" Width="350px">
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" Name="textBoxOpis" BorderBrush="#4288c1" Width="350px" TextChanged="textChanged">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -724,7 +723,7 @@
 
                 <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
 
-                <ComboBox Grid.Row="4"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px"  Height="30px" Width="350px" >
+                <ComboBox Grid.Row="4"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px" Name="comboBoxEra" Height="30px" Width="350px" SelectionChanged="textChanged">
                     <ComboBox.Resources>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="Black"/>
@@ -748,7 +747,7 @@
 
                 </ComboBox>
                 <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
-                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" LostFocus="comboBoxTLostFocus" Name="comboBoxT">
+                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px" LostFocus="comboBoxTLostFocus" Name="comboBoxT" SelectionChanged="textChanged">
                     <ComboBox.Resources>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="Black"/>
@@ -771,10 +770,13 @@
 
 
                 <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Tip:</Label>
+                
+                
                 <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="294.8,7.4,406.8,8.2" RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirTip" >
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi
                     </Label>
+                    
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
 
@@ -786,7 +788,7 @@
                     </Button.Resources>
                 </Button>
 
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="24.8,7.4,491.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod"   >
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="24.8,7.4,491.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Name="tbTip" TextChanged="textChanged"  >
 
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -800,7 +802,7 @@
                 </TextBox>
 
                 <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
-                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod" Name="textBoxPrihod"  >
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" MouseEnter="mouseEnter" GotFocus="gotFocusPrihod" LostFocus="lostFocusPrihod" Name="textBoxPrihod" TextChanged="textChanged" >
 
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -858,7 +860,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="8" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA" Click="ButtonAddSpomenikClik" VerticalAlignment="Top">
+                <Button Grid.Row="8" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Name="btnNext" Background="#008CBA" Click="ButtonAddSpomenikClik" VerticalAlignment="Top">
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Next
                     </Label>

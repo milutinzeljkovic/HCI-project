@@ -19,6 +19,7 @@ using System.ComponentModel;
 using ProjectHCI.Controlers;
 using ProjectHCI.EventHandlers;
 using ProjectHCI.DBCredentials;
+using ProjectHCI.Observers;
 
 namespace ProjectHCI
 {
@@ -27,14 +28,17 @@ namespace ProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
+		
 
         public event PropertyChangedEventHandler PropertyChanged;
         private GridViewModel GridViewModel { get; set; }
         private bool _showPanel;
-        private Brush color;
+        public Brush color;
         private string unetiTextIme;
         private string etiketaOznaka;
         private string unetiTextOznaka;
+
+		private static MainWindow mainInstance = null;
 
 
         protected virtual void OnPropertyChanged(string name)
@@ -45,7 +49,17 @@ namespace ProjectHCI
             }
         }
 
+		public void updateTipFiled(string text)
+		{
+			Console.WriteLine(text);
+			tbTip.Text = text;
+			Console.WriteLine("tip field");
+		}
 
+		public static MainWindow Instance()
+		{
+			return mainInstance;
+		}
 
      
 
@@ -68,7 +82,19 @@ namespace ProjectHCI
         public MainWindow()
         {
             InitializeComponent();
-			
+			mainInstance = this;
+			Subject instance = Subject.Instance();
+			new EtiketaObserver(instance);
+			new TipObserver(ref instance);
+
+			Observers.App app = Observers.App.Instance();
+			new MainPageObserver(app);
+			new SideBarObserver(app);
+			app.State = "state";
+
+
+			Console.WriteLine(instance.observers.Count());
+
 			FormDodajSpomenikHandlers formDodajSpomenikHandlers = new FormDodajSpomenikHandlers();
 			btnOdabirTip.Click += formDodajSpomenikHandlers.click_event_odabirtipa;
 			btnDodajEtiketu.Click += formDodajSpomenikHandlers.click_event_dodajetiketu;
@@ -104,17 +130,15 @@ namespace ProjectHCI
             
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+		
+
+		private void Add_Click(object sender, RoutedEventArgs e)
         {
             this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridFormVisible;
-			
-            (this.DataContext as GridViewModel).GridForm2Visible = false;
-            (this.DataContext as GridViewModel).GridMapVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
-            (this.DataContext as GridViewModel).GridTipVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
-            (this.DataContext as GridViewModel).GridFormVisible = true;
+			Observers.App app = Observers.App.Instance();
+			app.State = "form_spomenik";
+            
 
         }
 
@@ -123,6 +147,33 @@ namespace ProjectHCI
             get { return _showPanel; }
         }
 
+		public void hideAll()
+		{
+			this.DataContext = GridViewModel;
+			(this.DataContext as GridViewModel).GridFormVisible = false;
+			(this.DataContext as GridViewModel).GridFormPart2Visible = false;
+			(this.DataContext as GridViewModel).GridEtiketaVisible = false;
+			(this.DataContext as GridViewModel).GridForm2Visible = false;
+			(this.DataContext as GridViewModel).GridTipVisible = false;
+			(this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
+			(this.DataContext as GridViewModel).GridMapVisible = false;
+		}
+
+		public void showSpomenikForm()
+		{
+			hideAll();
+			(this.DataContext as GridViewModel).GridFormVisible = true;
+		}
+		public void showEtiketaForm()
+		{
+			hideAll();
+			(this.DataContext as GridViewModel).GridEtiketaVisible = true;
+		}
+		public void showTipForm()
+		{
+			hideAll();
+			(this.DataContext as GridViewModel).GridTipVisible = true;
+		}
 
         
 
@@ -185,43 +236,36 @@ namespace ProjectHCI
 
         private void ButtonCancelClik(object sender, RoutedEventArgs e)
         {
-            //dodaj ono da li ste sigurni...
-            this.DataContext = GridViewModel;
-            var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
-            (this.DataContext as GridViewModel).GridFormVisible = false; ;
-
+			Observers.App.Instance().State = "inital_state";
 
         }
 
         private void AddEtiketuClick(object sender, RoutedEventArgs e)
         {
-            //dodaj ono da li ste sigurni...
-            this.DataContext = GridViewModel;
-            var vis = (this.DataContext as GridViewModel).GridFormVisible;
-
-            (this.DataContext as GridViewModel).GridFormVisible = false;
-            (this.DataContext as GridViewModel).GridForm2Visible = false;
-            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
-            (this.DataContext as GridViewModel).GridTipVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = true;
-
-
+			Observers.App app = Observers.App.Instance();
+			app.State = "form_etiketa";
         }
+		
 
-        private void AddOznakuClick(object sender, RoutedEventArgs e)
+		private void etiketaCancel(object sender, RoutedEventArgs e)
+		{			
+			Observers.App app = Observers.App.Instance();
+			app.State = "inital_state";
+		}
+		
+
+		private void tipCancel(object sender, RoutedEventArgs e)
+		{
+
+			Observers.App app = Observers.App.Instance();
+			app.State = "inital_state";
+		}
+
+		private void AddOznakuClick(object sender, RoutedEventArgs e)
         {
-            //dodaj ono da li ste sigurni...
-            this.DataContext = GridViewModel;
-            var vis = (this.DataContext as GridViewModel).GridFormVisible;
-            (this.DataContext as GridViewModel).GridFormVisible = false;
-            (this.DataContext as GridViewModel).GridForm2Visible = false;
-            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
-            (this.DataContext as GridViewModel).GridTipVisible = true;
+
+			Observers.App app = Observers.App.Instance();
+			app.State = "form_tip";
         }
 
 
@@ -259,7 +303,15 @@ namespace ProjectHCI
 
 		private void AddEtiketuButtonClick(object sender, RoutedEventArgs e)
 		{
-			//validacija unosa
+			ControllerFactory factory = new ControllerFactory();
+			(factory.GetController("addEtiketu")).handle();
+			
+			
+			
+			
+			
+			
+			/*//validacija unosa
 			//provera username i passworda kod baze
 			//insert u bazu
 			//insert u observalble listu
@@ -284,7 +336,7 @@ namespace ProjectHCI
 			else if (result == MessageBoxResult.No)
 			{
 				// No code here  
-			}
+			}*/
 
 		}
 
@@ -298,7 +350,7 @@ namespace ProjectHCI
 		}
 
 
-
+		
 
 
 
@@ -360,16 +412,22 @@ namespace ProjectHCI
             textBoxOznaka.BorderBrush = color;
 
         }
+		
+		 private void textChanged(object sender, EventArgs e)
+		{
+			Console.WriteLine("text");
+			Observers.App.Instance().State = "form_spomenik";
 
+		}
 
-
-        private void lostFocusPrihod(object sender, EventArgs e)
+		private void lostFocusPrihod(object sender, EventArgs e)
         {
 
             // do your stuff
             if (textBoxPrihod.Text == "")
             {
                 textBoxPrihod.BorderBrush = Brushes.Red;
+			
 
             }
             else
@@ -452,6 +510,8 @@ namespace ProjectHCI
             textBoxEtiketaOznaka.BorderBrush = color;
 
         }
+
+
 
 
 
