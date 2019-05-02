@@ -43,9 +43,17 @@ namespace ProjectHCI.Observers
 			{
 				(factoty.GetViewHandler("FirstPage")).HandleView();
 			}
-			
-			
-			
+			else if(app.State == "odabir_tipa")
+			{
+				(factoty.GetViewHandler("OdabirTipa")).HandleView();
+			}
+			else if (app.State == "odabir_etikete")
+			{
+				(factoty.GetViewHandler("OdabirEtikete")).HandleView();
+			}
+
+
+
 		}
 	}
 }

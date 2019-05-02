@@ -87,10 +87,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controlers\AddEtiketuController.cs" />
+    <Compile Include="Controlers\AddSpomenikController.cs" />
+    <Compile Include="Controlers\AddTipController.cs" />
     <Compile Include="Controlers\Controller.cs" />
     <Compile Include="Controlers\ControllerFactory.cs" />
     <Compile Include="Controlers\DBConnection.cs" />
     <Compile Include="Controlers\EtiketaControler.cs" />
+    <Compile Include="Controlers\GetEtiketeController.cs" />
+    <Compile Include="Controlers\GetSpomenikeController.cs" />
+    <Compile Include="Controlers\GetTipoveController.cs" />
     <Compile Include="Controlers\TipControler.cs" />
     <Compile Include="DBCredentials\DBCredentials.cs" />
     <Compile Include="EtiketaObserver.cs" />
@@ -122,6 +127,8 @@
     <Compile Include="ViewHandlers\FormSpomenik.cs" />
     <Compile Include="ViewHandlers\FormTip.cs" />
     <Compile Include="ViewHandlers\NeuspesnoEtiketaHandler.cs" />
+    <Compile Include="ViewHandlers\OdabirEtiketeViewHandler.cs" />
+    <Compile Include="ViewHandlers\OdabirTipaViewHandler.cs" />
     <Compile Include="ViewHandlers\SideBarHandler.cs" />
     <Compile Include="ViewHandlers\UspesnoEtiketa.cs" />
     <Compile Include="ViewHandlers\ViewHandler.cs" />

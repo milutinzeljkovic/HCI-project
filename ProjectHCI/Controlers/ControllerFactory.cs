@@ -14,6 +14,8 @@ namespace ProjectHCI.Controlers
 			{
 				case "addEtiketu":
 					return new AddEtiketuController();
+				case "getEtikete":
+					return new GetEtiketeController();
 				default:
 					return null;
 			}

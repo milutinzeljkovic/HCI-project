@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ using ProjectHCI.Controlers;
 using ProjectHCI.EventHandlers;
 using ProjectHCI.DBCredentials;
 using ProjectHCI.Observers;
+using System.Windows.Threading;
 
 namespace ProjectHCI
 {
@@ -61,11 +63,62 @@ namespace ProjectHCI
 			return mainInstance;
 		}
 
-     
+		private string eOznaka;
+		public string EOznaka
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxEtiketaOznaka.Text;
+			});
+			set { eOznaka = value; }
+		}
+
+		private string eOpis;
+		public string EOpis
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxEtiketaOpis.Text;
+			});
+			set { eOpis = value; }
+		}
+
+		private string eBoja;
+		public string EBoja
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return cp.SelectedColor.ToString();
+			});
+			set { eBoja = value; }
+		}
+
+
+		private bool btnE = true;
+
+		public bool BtnAddEtiketu
+		{
+			get => btnE;
+			set => this.Dispatcher.Invoke(() =>
+			{
+				if(value == true)
+				{
+					btnAddEtiketu.IsEnabled = true;
+				}
+				else
+				{
+					btnAddEtiketu.IsEnabled = false;
+				}
+			});
+
+		}
 
 
 
-        public static ObservableCollection<Spomenik> Spomenici
+
+
+
+		public static ObservableCollection<Spomenik> Spomenici
         {
             get;
             set;
@@ -86,7 +139,7 @@ namespace ProjectHCI
 			Subject instance = Subject.Instance();
 			new EtiketaObserver(instance);
 			new TipObserver(ref instance);
-
+			this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			Observers.App app = Observers.App.Instance();
 			new MainPageObserver(app);
 			new SideBarObserver(app);
@@ -96,8 +149,8 @@ namespace ProjectHCI
 			Console.WriteLine(instance.observers.Count());
 
 			FormDodajSpomenikHandlers formDodajSpomenikHandlers = new FormDodajSpomenikHandlers();
-			btnOdabirTip.Click += formDodajSpomenikHandlers.click_event_odabirtipa;
-			btnDodajEtiketu.Click += formDodajSpomenikHandlers.click_event_dodajetiketu;
+			//btnOdabirTip.Click += formDodajSpomenikHandlers.click_event_odabirtipa;
+			//btnDodajEtiketu.Click += formDodajSpomenikHandlers.click_event_dodajetiketu;
 			btnDodajIkonicu.Click += formDodajSpomenikHandlers.click_event_imagechoose;
 			btnAddSpomenikClick.Click += (new FormDodajSpomenikHandlers.DodavanjeSpomenika(null)).click_event_dodajSpomenik;
 
@@ -299,44 +352,25 @@ namespace ProjectHCI
 
         }
 
-        
+		private string myVar;
+
+		public string MyProperty
+		{
+			get => this.Dispatcher.Invoke(() =>
+   {
+	   return "dssasda111111111111111";
+   });
+			set { myVar = value; }
+		}
+
+
 
 		private void AddEtiketuButtonClick(object sender, RoutedEventArgs e)
 		{
+			BtnAddEtiketu = false;
 			ControllerFactory factory = new ControllerFactory();
+			
 			(factory.GetController("addEtiketu")).handle();
-			
-			
-			
-			
-			
-			
-			/*//validacija unosa
-			//provera username i passworda kod baze
-			//insert u bazu
-			//insert u observalble listu
-
-			Etiketa etiketa = new Etiketa();
-			EtiketaControler etiketaControler = new EtiketaControler(etiketa);
-			etiketaControler.setEtiketaOznaka(textBoxEtiketaOznaka.Text);
-			etiketaControler.setEtiketaOpis(textBoxEtiketaOpis.Text);
-			etiketaControler.setEtiketaBoja(cp.SelectedColor.ToString());
-			etiketaControler.saveEtiketa();
-
-
-			//ovde napraviti custom dialog za potvrdu dodavanja ili prikaz greske
-			string res = etiketaControler.Result.Equals("greska") ? "Greska prilikom dodavanja, proverite jedinstvenost" : "Uspesno dodata etiketa!";
-			MessageBoxResult result = MessageBox.Show(res,
-				"Confirmation", MessageBoxButton.YesNo);
-
-			if (result == MessageBoxResult.Yes)
-			{
-				// Yes code here  
-			}
-			else if (result == MessageBoxResult.No)
-			{
-				// No code here  
-			}*/
 
 		}
 
@@ -484,8 +518,33 @@ namespace ProjectHCI
    
         }
 
+		private List<Etiketa> listEtikete;
+		public List<Etiketa> ListEtikete
+		{
+			get { return listEtikete; }
+			set => this.Dispatcher.Invoke(() =>
+			{
+				this.listEtikete = value;
+			});
+		}
 
-        private void textBoxEtiketaOznakaLost(object sender, EventArgs e)
+
+		private void buttonAddEtiketuClick(object sender, EventArgs e)
+		{
+			
+			ControllerFactory factory = new ControllerFactory();
+			Controller controller = factory.GetController("getEtikete");
+			controller.handle();
+		}
+
+		private void btnOdaberiTipClick(object sender, EventArgs e)
+		{
+			Observers.App.Instance().State = "odabir_tipa";
+
+		}
+
+
+		private void textBoxEtiketaOznakaLost(object sender, EventArgs e)
         {
             etiketaOznaka = textBoxEtiketaOznaka.Text;
             // do your stuff

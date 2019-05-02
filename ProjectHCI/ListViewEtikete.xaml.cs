@@ -24,9 +24,26 @@ namespace ProjectHCI
 		public ListViewEtikete()
 		{
 			InitializeComponent();
-			List<Etiketa> items = EtiketaControler.fetchEtikete();
-
-			lvUsers.ItemsSource = items;
+			lvUsers.ItemsSource = MainWindow.Instance().ListEtikete;
 		}
+
+		void odabir(object sender, RoutedEventArgs e)
+		{
+			String prikaz = lvUsers.SelectedItem == null ? "" : ((Etiketa)lvUsers.SelectedItem).Oznaka;
+			String etikete = MainWindow.Instance().tbEtiketa.Text;
+			string str = etikete;
+			if(str !="")
+			{
+				str += ", ";
+			}
+			
+			str += prikaz;
+			
+			MainWindow.Instance().tbEtiketa.Text = str;
+			Observers.App.Instance().State = "form_spomenik";
+			this.Close();
+
+		}
+
 	}
 }

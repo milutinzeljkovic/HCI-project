@@ -35,11 +35,13 @@ namespace ProjectHCI
 
 		void odabir(object sender, RoutedEventArgs e)
 		{
-			String prikaz = lvUsers.SelectedItem == null ? "" : ((Tip)lvUsers.SelectedItem).Ime;
-			Console.WriteLine("klik odabir "+prikaz);
-			Subject instance = Subject.Instance();
-			Console.WriteLine(instance.observers.Count());
-			instance.TipState = prikaz;
+			Console.WriteLine("klik odabir");
+			String prikaz = lvUsers.SelectedItem == null ? "" : ((Tip)lvUsers.SelectedItem).Oznaka;
+			
+			MainWindow.Instance().tbTip.Text = prikaz;
+			Observers.App.Instance().State = "form_spomenik";
+			this.Close();
+			
 		}
 
 

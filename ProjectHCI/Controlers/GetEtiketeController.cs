@@ -1,30 +1,27 @@
-﻿using MySql.Data.MySqlClient;
+﻿
+using MySql.Data.MySqlClient;
 using ProjectHCI.DBCredentials;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Threading;
+using ProjectHCI.Models;
 
 namespace ProjectHCI.Controlers
 {
-	public class AddEtiketuController : Controller
+	class GetEtiketeController : Controller
 	{
 		private static BackgroundWorker backgroundWorker;
 
 		public void handle()
 		{
-			Console.WriteLine("krenuo");
 			backgroundWorker = new BackgroundWorker
 
 			{
 
 				WorkerReportsProgress = true,
-
 				WorkerSupportsCancellation = true
 
 			};
@@ -41,42 +38,48 @@ namespace ProjectHCI.Controlers
 
 		private void doWork(object sender, DoWorkEventArgs e)
 		{
-			
-			Console.WriteLine("asdasdasdasdsadasds");
-			MainWindow main = MainWindow.Instance();
-
-			string oznaka = main.EOznaka;
-			string opis = main.EOpis;
-			string boja = main.EBoja;
 			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
 			dbCon.DatabaseName = db.Database;
 			dbCon.Username = db.Username;
 			dbCon.Server = db.Server;
 			dbCon.Password = "wU17KVpis3";
+
+			List<Etiketa> etikete = new List<Etiketa>();
+
 			if (dbCon.IsConnect())
 			{
 				try
 				{
-				
-					string query = "INSERT INTO hci_etiketa_table (id_oznaka, opis, boja) VALUES ('" + oznaka + "','" + opis + "','" + boja + "')";
+					string query = "SELECT * FROM hci_etiketa_table";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
-					cmd.ExecuteNonQuery();
+					var reader = cmd.ExecuteReader();
+
+					Console.WriteLine(reader);
+					while (reader.Read())
+					{
+
+						etikete.Add(new Etiketa() { Oznaka = reader.GetString("id_oznaka"), Opis = reader.GetString("opis"), Boja = reader.GetString("boja") });
+
+
+					}
 					dbCon.Close();
-					e.Result = "uspesno";
+					e.Result = etikete;
+
 
 				}
 				catch (MySqlException ex)
 				{
-					e.Result = ex.Message;
+					e.Result = "greska";
+					Console.WriteLine("greska");
 				}
 				finally
 				{
 					dbCon.Close();
 				}
-
-
 			}
+			
+
 		}
 
 		private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -87,22 +90,20 @@ namespace ProjectHCI.Controlers
 		}
 
 
-		private  void workCompleted(object sender, RunWorkerCompletedEventArgs e)
+		private void workCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 
-			MainWindow.Instance().BtnAddEtiketu = true;
-
-			if ((string)e.Result == "uspesno")
+			if ((List<Etiketa>)e.Result != null)
 			{
-				Observers.App.Instance().State = "uspesno_etiketa";
-				Console.WriteLine("completed");
+
+				MainWindow.Instance().ListEtikete = (List<Etiketa>)e.Result;
+				Observers.App.Instance().State = "odabir_etikete";
 
 			}
 
 			else
 			{
-				Observers.App.Instance().State = "neuspesno_etiketa";
-				Console.WriteLine(e);
+				
 
 			}
 

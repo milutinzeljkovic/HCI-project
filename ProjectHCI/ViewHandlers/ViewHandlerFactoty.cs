@@ -26,6 +26,10 @@ namespace ProjectHCI.ViewHandlers
 					return new NeuspesnoEtiketaHandler();
 				case "FirstPage":
 					return new FirstPage();
+				case "OdabirTipa":
+					return new OdabirTipaViewHandler();
+				case "OdabirEtikete":
+					return new OdabirEtiketeViewHandler();
 				default:
 					return null;
 			}

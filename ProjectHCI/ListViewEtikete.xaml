@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectHCI"
         mc:Ignorable="d"
-        Title="ListViewEtikete" Height="200" Width="455">
+        Title="ListViewEtikete" Height="300" Width="455">
+   
     <Grid>
-        <ListView Margin="10" Name="lvUsers">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView Margin="10" Name="lvUsers" Grid.Row="0" Height="150px" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Oznaka" Width="120" DisplayMemberBinding="{Binding Oznaka}" />
@@ -16,5 +21,22 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Grid.Row="1"  Height="30px" Width="80px"  RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirEtiketa" Click="odabir">
+            <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                Odaberi
+            </Label>
+
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="BorderBrush" Value="#4288c1"/>
+                    <Setter Property="BorderThickness" Value="5px"/>
+                </Style>
+
+            </Button.Resources>
+        </Button>
     </Grid>
+    
+    
 </Window>
