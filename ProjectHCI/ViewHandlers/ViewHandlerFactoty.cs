@@ -24,12 +24,22 @@ namespace ProjectHCI.ViewHandlers
 					return new UspesnoEtiketa();
 				case "NeuspesnoEtiketaHandler":
 					return new NeuspesnoEtiketaHandler();
+				case "UspesnoTip":
+					return new UspesnoTip();
+				case "NeuspesnoTip":
+					return new NeuspesnoTipHandler();
 				case "FirstPage":
 					return new FirstPage();
 				case "OdabirTipa":
 					return new OdabirTipaViewHandler();
 				case "OdabirEtikete":
 					return new OdabirEtiketeViewHandler();
+				case "ModifikacijaEtikete":
+					return new ModifikacijaEtikete();
+				case "UspesnaModifikacijaEtikete":
+					return new ModifikacijaEtiketeUspesno();
+				case "ModifikacijaSpomenika":
+					return new ModifikacijaSpomenika();
 				default:
 					return null;
 			}

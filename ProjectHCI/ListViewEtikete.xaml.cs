@@ -31,16 +31,31 @@ namespace ProjectHCI
 		{
 			String prikaz = lvUsers.SelectedItem == null ? "" : ((Etiketa)lvUsers.SelectedItem).Oznaka;
 			String etikete = MainWindow.Instance().tbEtiketa.Text;
-			string str = etikete;
+			string str;
+			if(Observers.App.Instance().PreviousState=="izmena_spomenika")
+			{
+				str = IzmenaSpomenika.Instance().tbEtiketa.Text;
+			}
+			else
+			{
+				str = etikete;
+			}
 			if(str !="")
 			{
 				str += ", ";
 			}
 			
 			str += prikaz;
-			
-			MainWindow.Instance().tbEtiketa.Text = str;
-			Observers.App.Instance().State = "form_spomenik";
+			if(Observers.App.Instance().PreviousState == "izmena_spomenika")
+			{
+				IzmenaSpomenika.Instance().tbEtiketa.Text = str;
+			}
+			else
+			{
+				MainWindow.Instance().tbEtiketa.Text = str;
+				Observers.App.Instance().State = "form_spomenik";
+			}
+			Observers.App.Instance().PreviousState = "";
 			this.Close();
 
 		}

@@ -1,0 +1,397 @@
+﻿<Window x:Class="ProjectHCI.IzmenaSpomenika"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectHCI"
+        mc:Ignorable="d"
+        Title="IzmenaSpomenika" Height="600" Width="1000">
+    <DockPanel>
+
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Margin="0,0,0,0"  Name="spomenik_form"  Visibility="Hidden">
+            <Grid DockPanel.Dock="Top" Name="spomenik_form_grid"
+              Width="500px"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="42,5,300,100" Height="559"  
+               Visibility="Visible" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="90px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+                    <RowDefinition Height="45px"/>
+
+                </Grid.RowDefinitions>
+                <Label Height="30px" Padding="0px" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0.4,5.8">Oznaka:</Label>
+
+
+                <TextBox Grid.Column="1" Margin="25.8,5,405.8,5.8" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px" Name="textBoxOznaka" >
+
+                    <TextBox.Resources>
+
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label Height="30px" Padding="0px" Grid.Column="2" Grid.Row="0" RenderTransformOrigin="0.727,0.54" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,7,280.8,8.6" Width="93">label:</Label>
+
+                <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.2,0.4,5.4" >Ime:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="25.8,5.2,405.8,6.4" BorderThickness="2px"  Name="textBoxIme" BorderBrush="#4288c1" Height="30px" Width="350px"  >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+                </TextBox>
+                <Label Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Opis:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="25.8,5.8,405.8,5.6" BorderThickness="2px" Name="textBoxOpis" BorderBrush="#4288c1" Width="350px" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+
+                <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.4,0.4,5.4" >Era porekla:</Label>
+
+                <ComboBox Grid.Row="4"  Grid.Column="1" Margin="25.8,6.4,405.8,5.2" BorderThickness="2px" Name="comboBoxEra" Height="30px" Width="350px" >
+                    <ComboBox.Resources>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#000000"/>
+                        </Style>
+                        <!-- color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
+
+                        <!-- Mouse over color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
+                    </ComboBox.Resources>
+
+
+                    <ComboBoxItem>Paleolit</ComboBoxItem>
+                    <ComboBoxItem>Neolit</ComboBoxItem>
+                    <ComboBoxItem>Stari vek</ComboBoxItem>
+                    <ComboBoxItem>Srednji vek</ComboBoxItem>
+                    <ComboBoxItem>Rensesansa</ComboBoxItem>
+                    <ComboBoxItem>Moderno doba</ComboBoxItem>
+
+                </ComboBox>
+                <Label Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,0.2,3.8" Height="32" >Turisticki status:</Label>
+                <ComboBox Grid.Row="5"  Grid.Column="1" Margin="26,9,405.6,5.8" BorderThickness="2px"  Height="30px" Width="350px"  Name="comboBoxT" >
+                    <ComboBox.Resources>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#000000"/>
+                        </Style>
+                        <!-- color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="White" />
+
+                        <!-- Mouse over color of ComboBoxItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White" />
+                    </ComboBox.Resources>
+
+
+                    <ComboBoxItem>Eksploatisan</ComboBoxItem>
+                    <ComboBoxItem>Dostupan</ComboBoxItem>
+                    <ComboBoxItem>Nedostupan</ComboBoxItem>
+
+                </ComboBox>
+
+
+                <Label Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Tip:</Label>
+
+
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="294.8,7.4,406.8,8.2" RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirTip" Click="btnOdaberiTipClick" >
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="24.8,7.4,491.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Name="tbTip"   >
+
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+
+                </TextBox>
+
+                <Label Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Godisnji prihod:</Label>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="25.8,5.6,405.8,6" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Width="350px"  Name="textBoxPrihod"  >
+
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+
+                </TextBox>
+
+                <Label Grid.Row="7"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5.6,0.4,6">Etikete:</Label>
+                <Button Grid.Row="7" Grid.Column="1" Height="30px" Width="80px" Margin="294.8,7.4,406.8,8.2" RenderTransformOrigin="0.231,0.307" Background="White" Name="btnDodajEtiketu"  Click="buttonAddEtiketuClick">
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Dodaj
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+                <TextBox Grid.Row="7" Grid.Column="1" Margin="24.8,7.4,491.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Name="tbEtiketa"   >
+
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+
+                </TextBox>
+
+
+
+                <Button Grid.Row="8" Grid.Column="1" Margin="23,0,675.8,0" Height="30px" Width="80px" Background="#f27b7b" Click="cancel_click" >
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
+                        Cancel
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                            <Style.Triggers>
+                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                    <Setter Property="Button.Background" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="8" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Name="btnNext" Background="#008CBA"  VerticalAlignment="Top" Click="next_click">
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        Next
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            
+
+
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Left" Width="1065px" Name="form_spomenik2" Margin="-1000,0,0,0" Visibility="Hidden">
+            <Grid DockPanel.Dock="Top" 
+              Width="500px"  VerticalAlignment="Stretch" Name="form_spomenik2_grid" HorizontalAlignment="Stretch" Margin="100,50,400,100" Height="559"  
+               Visibility="Visible" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="180px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="45px" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >UNESCO:</Label>
+                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="unesco" Name="radioButtonDaUnesco"  >Da</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="unesco" Name="radioButtonNeUnesco"  >Ne</RadioButton>
+
+                <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Naseljeno met:</Label>
+                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="naseljeno mesto" Name="radioButtonDaNaselje" >Da</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="naseljeno mesto" Name="radioButtonNeNaselje" >Ne</RadioButton>
+
+                <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Obradjen:</Label>
+                <CheckBox Grid.Row="4" Grid.Column="1" Margin="25.8,12.2,705.8,12.6" Name="checkBox" >Da</CheckBox>
+
+
+                <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
+                <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
+                Name="calendar1" VerticalAlignment="Top" Width="180"  />
+                <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White"  Name="btnDodajIkonicu">
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="124.8,7.4,431.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Name="tbSlika" >
+
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+
+                </TextBox>
+
+                <Button Grid.Row="5" Grid.Column="1" Margin="25.2,10.8,676.4,-40" Height="30px" Width="80px" Background="#f27b7b" Click="back_click">
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
+                        Back
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+                <Button Grid.Row="5" Grid.Column="1" Margin="270.2,12.8,431.4,-40.4" Height="30px"  Width="80px" Background="#008CBA"  Name="btnAddSpomenikClick"  Click="add_click">
+                    <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        Add
+                    </Label>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+
+
+        </DockPanel>
+
+
+
+
+
+
+
+        <DockPanel DockPanel.Dock="Left" Width="965" Name="odabir_spomenika" Visibility="Visible" Margin="-1000,0,0,0" RenderTransformOrigin="0.5,0.5" >
+            <DockPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.071"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.599"/>
+                </TransformGroup>
+            </DockPanel.RenderTransform>
+            <Grid Width="800" Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="757*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400px"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ListView Margin="-44,30,-55,69" Name="lvUsers" Grid.Row="0" Grid.ColumnSpan="2" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Oznaka" Width="100" DisplayMemberBinding="{Binding Oznaka}" />
+                            <GridViewColumn Header="Ime" Width="100" DisplayMemberBinding="{Binding Ime}" />
+                            <GridViewColumn Header="Opis" Width="100" DisplayMemberBinding="{Binding Opis}" />
+                            <GridViewColumn Header="Unesco" Width="100" DisplayMemberBinding="{Binding Unesco}" />
+                            <GridViewColumn Header="Era porekla" Width="100" DisplayMemberBinding="{Binding EraPorekla}" />
+                            <GridViewColumn Header="Datum otkrivanja" Width="100" DisplayMemberBinding="{Binding Datum}" />
+                            <GridViewColumn Header="Obradjen" Width="100" DisplayMemberBinding="{Binding Obradjen}" />
+                            <GridViewColumn Header="Slika" Width="100" DisplayMemberBinding="{Binding Slika}" />
+                            <GridViewColumn Header="Etikete" Width="100" DisplayMemberBinding="{Binding Etikete}" />
+                            <GridViewColumn Header="Naseljeno mesto" Width="100" DisplayMemberBinding="{Binding NaseljenoMesto}" />
+                            <GridViewColumn Header="Tip" Width="100" DisplayMemberBinding="{Binding Tip}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Grid.Row="1"  Height="30px" Width="80px"  RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirEtiketa"  Margin="338,0,339,-10" Click="odabir_click">
+                    <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
+                        Odaberi
+                    </Label>
+
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </DockPanel>
+    </DockPanel>
+</Window>

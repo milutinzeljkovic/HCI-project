@@ -385,20 +385,20 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >UNESCO:</Label>
-                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="unesco">Da</RadioButton>
-                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="unesco">Ne</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="unesco" Name="radioButtonDaUnesco" Checked="handleCheck1" >Da</RadioButton>
+                <RadioButton Grid.Row="0" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="unesco" Name="radioButtonNeUnesco" Checked="handleCheck1" >Ne</RadioButton>
 
                 <Label Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Naseljeno met:</Label>
-                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="naseljeno mesto">Da</RadioButton>
-                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="naseljeno mesto">Ne</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="25.8,12.2,705.8,12.6" Grid.Column="1" GroupName="naseljeno mesto" Checked="handleCheck2">Da</RadioButton>
+                <RadioButton Grid.Row="1" Height="20px" Margin="88.8,12.2,642.8,12.6" Grid.Column="1" GroupName="naseljeno mesto" Checked="handleCheck2">Ne</RadioButton>
 
                 <Label Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902" >Obradjen:</Label>
-                <CheckBox Grid.Row="4" Grid.Column="1" Margin="25.8,12.2,705.8,12.6">Da</CheckBox>
+                <CheckBox Grid.Row="4" Grid.Column="1" Margin="25.8,12.2,705.8,12.6" Checked="handleCheck3">Da</CheckBox>
 
 
                 <Label Grid.Column="0" Grid.Row="2" Height="35px" Margin="0,0,0.2,139.4">Datum otkiravanja:</Label>
                 <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
-                Name="calendar1" VerticalAlignment="Top" Width="180" />
+                Name="calendar1" VerticalAlignment="Top" Width="180" SelectedDatesChanged="dateChanged" />
                 <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
                 <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White"  Name="btnDodajIkonicu">
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
@@ -414,6 +414,19 @@
 
                     </Button.Resources>
                 </Button>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="124.8,7.4,431.8,8.2" BorderThickness="2px" BorderBrush="#4288c1" Height="30px" Name="tbSlika" >
+
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#4288c1"/>
+                            <Setter Property="BorderThickness" Value="5px"/>
+                        </Style>
+                    </TextBox.Resources>
+
+
+                </TextBox>
+                
                 <Button Grid.Row="5" Grid.Column="1" Margin="25.6,0,676,-135" Height="30px" Width="80px" Background="#f27b7b" Click="ButtonBackClick" >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="33" >
                         Back
@@ -428,7 +441,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA"  Name="btnAddSpomenikClick">
+                <Button Grid.Row="5" Grid.Column="1" Margin="270,0,430,-134.2" Height="30px"  Width="80px" Background="#008CBA"  Name="btnAddSpomenikClick" Click="btnAddSpomenik">
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>
@@ -635,7 +648,7 @@
 
                     </Button.Resources>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" Name="buttonAddTip" Click="buttonAddTipClick" >
+                <Button Grid.Row="4" Grid.Column="1" Margin="268.8,7.8,432.8,0" Height="30px"  Width="80px" Background="#008CBA"   VerticalAlignment="Top" Name="buttonAddTip" Click="buttonAddTipClick"  >
                     <Label Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                         Add
                     </Label>

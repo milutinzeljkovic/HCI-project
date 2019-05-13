@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjectHCI.Observers
 {
+	
+
 	public class App
 	{
+
 
 		private List<MainObserver> observers;
 		private static App instance = null;

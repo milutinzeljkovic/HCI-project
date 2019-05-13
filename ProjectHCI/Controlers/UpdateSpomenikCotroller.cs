@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace ProjectHCI.Controlers
 {
-	class AddTipController : Controller
+	class UpdateSpomenikCotroller : Controller
 	{
 		private static BackgroundWorker backgroundWorker;
 
 		public void handle()
 		{
-			Console.WriteLine("krenuo");
 			backgroundWorker = new BackgroundWorker
 
 			{
@@ -38,12 +37,13 @@ namespace ProjectHCI.Controlers
 
 		private void doWork(object sender, DoWorkEventArgs e)
 		{
+			Console.WriteLine("update");
+ 			IzmenaSpomenika i = IzmenaSpomenika.Instance();
 
-			MainWindow main = MainWindow.Instance();
-			string oznaka = main.TOznaka;
-			string opis = main.TOpis;
-			string slika = main.TSlika;
-			string ime = main.TIme;
+			//ovo za update starih etiketa ako se promene necu sad da radim ovo
+			string[] stareEtikete = i.EtiketaStara.Split(',');
+			string[] noveEtikete = i.Etiketa.Split(',');
+
 			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
 			dbCon.DatabaseName = db.Database;
@@ -54,8 +54,30 @@ namespace ProjectHCI.Controlers
 			{
 				try
 				{
-					string query = "INSERT INTO hci_tip_table (oznaka, ime, opis, slika) VALUES ('" + oznaka + "','" + ime + "','" + opis + "','" +slika + "')";
+
+					string query = "Update  hci_spomenik_table set opis = '" + i.Opis + "', ime = '" + i.Ime + "',tip = '" + i.Tip  + "', " +
+						"era = '" + i.Era + "',turisticki_status = '" + i.TuristickiStatus + "',prihod = '" + i.Prihod +
+						 "',naseljeno_mesto = '" + i.Naselje + "',datum_otkrivanja = '" + i.Datum + "',ikonica = '" + i.Slika +
+						  "',obradjen = '" + i.Obradjen + "'  where oznaka = '" + i.Oznaka + "'";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
+					if((stareEtikete.Length != noveEtikete.Length))
+					{
+						int cnt1 = stareEtikete.Length;
+						int cnt2 = noveEtikete.Length;
+						int brojac = cnt2 - cnt1;
+						int pocetak = cnt1 - 1;
+						for(int ii=1;ii<=brojac;ii++)
+						{
+							string query2 = "INSERT INTO `QlmldJccRC`.`hci_spomenik_etiketa` (`oznaka_etikete`, `oznaka_spomenika`) VALUES ('" + noveEtikete[ii+pocetak] + "', '" + i.Oznaka + "')";
+							var cmd2 = new MySqlCommand(query2, dbCon.Connection);
+							cmd2.ExecuteNonQuery();
+						}
+
+						
+					}
+
+
+
 					cmd.ExecuteNonQuery();
 					dbCon.Close();
 					e.Result = "uspesno";
@@ -63,6 +85,7 @@ namespace ProjectHCI.Controlers
 				}
 				catch (MySqlException ex)
 				{
+					Console.WriteLine(ex);
 					e.Result = ex.Message;
 				}
 				finally
@@ -85,19 +108,17 @@ namespace ProjectHCI.Controlers
 		private void workCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 
-			MainWindow.Instance().BtnAddTip = true;
+			MainWindow.Instance().BtnAddEtiketu = true;
 
 			if ((string)e.Result == "uspesno")
 			{
-				
-				Observers.App.Instance().State = "uspesno_tip";
 				Console.WriteLine("completed");
+				//Observers.App.Instance().State = "modifikacija_etikete_uspesno";
 
 			}
 
 			else
 			{
-				Observers.App.Instance().State = "neuspesno_tip";
 				Console.WriteLine(e);
 
 			}

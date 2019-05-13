@@ -16,6 +16,18 @@ namespace ProjectHCI.Controlers
 					return new AddEtiketuController();
 				case "getEtikete":
 					return new GetEtiketeController();
+				case "getTipove":
+					return new GetTipoveController();
+				case "addTip":
+					return new AddTipController();
+				case "addSpomenik":
+					return new AddSpomenikController();
+				case "updateEtiketu":
+					return new UpdateEtiketuController();
+				case "getSpomenike":
+					return new GetSpomenikeControllercs();
+				case "updateSpomenik":
+					return new UpdateSpomenikCotroller();
 				default:
 					return null;
 			}

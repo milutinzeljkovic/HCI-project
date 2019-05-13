@@ -39,6 +39,14 @@ namespace ProjectHCI.Observers
 			{
 				(factoty.GetViewHandler("NeuspesnoEtiketaHandler")).HandleView();
 			}
+			else if (app.State == "uspesno_tip")
+			{
+				(factoty.GetViewHandler("UspesnoTip")).HandleView();
+			}
+			else if (app.State == "neuspesno_tip")
+			{
+				(factoty.GetViewHandler("NeuspesnoTip")).HandleView();
+			}
 			else if(app.State == "inital_state")
 			{
 				(factoty.GetViewHandler("FirstPage")).HandleView();
@@ -51,7 +59,22 @@ namespace ProjectHCI.Observers
 			{
 				(factoty.GetViewHandler("OdabirEtikete")).HandleView();
 			}
-
+			else if (app.State == "izmena_etiketa")
+			{
+				//(factoty.GetViewHandler("OdabirEtikete")).HandleView();
+			}
+			else if (app.State == "modifikacija_etikete")
+			{
+				(factoty.GetViewHandler("ModifikacijaEtikete")).HandleView();
+			}
+			else if(app.State == "modifikacija_etikete_uspesno")
+			{
+				(factoty.GetViewHandler("UspesnaModifikacijaEtikete")).HandleView();
+			}
+			else if(app.State == "modifikacija_spomenika")
+			{
+				(factoty.GetViewHandler("ModifikacijaSpomenika")).HandleView();
+			}
 
 
 		}

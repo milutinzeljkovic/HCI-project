@@ -74,6 +74,11 @@ namespace ProjectHCI.EventHandlers
 			{
 				// Open document 
 				string filename = dlg.FileName;
+				string[] a = filename.Split('\\');
+				int c = a.Count();
+				MainWindow.Instance().tbSlika.Text = a[c-1];
+				MainWindow.Instance().SSlika = filename;
+				Console.WriteLine("odabrana slika: " + MainWindow.Instance().SSlika);
 
 			}
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectHCI.Controlers
 {
-	class AddSpomenikController : Controller
+	class UpdateEtiketuController : Controller
 	{
 		private static BackgroundWorker backgroundWorker;
 
@@ -37,21 +37,9 @@ namespace ProjectHCI.Controlers
 
 		private void doWork(object sender, DoWorkEventArgs e)
 		{
+			Console.WriteLine("update");
 
-			MainWindow main = MainWindow.Instance();
-			Dictionary<string, string> dictionary = main.dictionary;
-			string etikete = dictionary["etikete"];
-			List<string> ee = new List<string>();
-			string[] ar = etikete.Split(',');
-			foreach (string item in ar)
-			{
-				ee.Add(item.Trim());
-				Console.WriteLine(item.Trim());
-			}
-			
-			string oznaka = main.EOznaka;
-			string opis = main.EOpis;
-			string boja = main.EBoja;
+			IzmenaEtikete i = IzmenaEtikete.Instance();
 			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
 			dbCon.DatabaseName = db.Database;
@@ -60,25 +48,25 @@ namespace ProjectHCI.Controlers
 			dbCon.Password = "wU17KVpis3";
 			if (dbCon.IsConnect())
 			{
-				string query = "INSERT INTO `QlmldJccRC`.`hci_spomenik_table` (`oznaka`, `ime`, `opis`, `tip`, `era`, `turisticki_status`, `prihod`, `unesco`, `naseljeno_mesto`, `datum_otkrivanja`, `ikonica`, `obradjen`)" +
-					" VALUES ('" + dictionary["oznaka"] + "', '" + dictionary["ime"] + "', '" + dictionary["opis"] + "', '" + dictionary["tipovi"] + "', '" + dictionary["era"] + "', '" + dictionary["status"] + "', '" + dictionary["prihod"] + "', '" + dictionary["unesco"] + "', '" + dictionary["naselje"] + "', '" + dictionary["date"] + "', '" + dictionary["ikonica"] + "', '" + dictionary["obradjen"] + "')";
-					var cmd = new MySqlCommand(query, dbCon.Connection);
-					cmd.ExecuteNonQuery();
-
-				int i = 0;
-				foreach(string el in ee)
+				try
 				{
 
-					string query2 = "INSERT INTO `QlmldJccRC`.`hci_spomenik_etiketa` (`oznaka_etikete`, `oznaka_spomenika`) VALUES ('" + el + "', '" + dictionary["oznaka"] + "')";
-					var cmd2 = new MySqlCommand(query2, dbCon.Connection);
-					cmd2.ExecuteNonQuery();
-
-				}
-
-				dbCon.Close();
+					string query = "Update  hci_etiketa_table set opis = '"+i.Opis+"', boja = '"+i.Boja+"' where id_oznaka = '"+i.Oznaka+"'";
+					var cmd = new MySqlCommand(query, dbCon.Connection);
+					cmd.ExecuteNonQuery();
+					dbCon.Close();
 					e.Result = "uspesno";
 
-				
+				}
+				catch (MySqlException ex)
+				{
+					Console.WriteLine(ex);
+					e.Result = ex.Message;
+				}
+				finally
+				{
+					dbCon.Close();
+				}
 
 
 			}
@@ -99,18 +87,19 @@ namespace ProjectHCI.Controlers
 
 			if ((string)e.Result == "uspesno")
 			{
-				Observers.App.Instance().State = "uspesno_etiketa";
 				Console.WriteLine("completed");
+				Observers.App.Instance().State = "modifikacija_etikete_uspesno";
 
 			}
 
 			else
 			{
-				Observers.App.Instance().State = "neuspesno_etiketa";
 				Console.WriteLine(e);
 
 			}
 
 		}
+
+
 	}
 }

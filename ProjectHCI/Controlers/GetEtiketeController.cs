@@ -97,7 +97,16 @@ namespace ProjectHCI.Controlers
 			{
 
 				MainWindow.Instance().ListEtikete = (List<Etiketa>)e.Result;
-				Observers.App.Instance().State = "odabir_etikete";
+				Observers.App app = Observers.App.Instance();
+				if (app.State == "izmena_etiketa")
+				{
+					Observers.App.Instance().State = "modifikacija_etikete";
+				}
+				else
+				{
+					Observers.App.Instance().State = "odabir_etikete";
+				}
+				
 
 			}
 

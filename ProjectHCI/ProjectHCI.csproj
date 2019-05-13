@@ -95,12 +95,21 @@
     <Compile Include="Controlers\EtiketaControler.cs" />
     <Compile Include="Controlers\GetEtiketeController.cs" />
     <Compile Include="Controlers\GetSpomenikeController.cs" />
+    <Compile Include="Controlers\GetSpomenikeControllercs.cs" />
     <Compile Include="Controlers\GetTipoveController.cs" />
     <Compile Include="Controlers\TipControler.cs" />
+    <Compile Include="Controlers\UpdateEtiketuController.cs" />
+    <Compile Include="Controlers\UpdateSpomenikCotroller.cs" />
     <Compile Include="DBCredentials\DBCredentials.cs" />
     <Compile Include="EtiketaObserver.cs" />
     <Compile Include="EventHandlers\FormDodajSpomenikHandlers.cs" />
     <Compile Include="EventHandlers\FormDodajTipHandlers.cs" />
+    <Compile Include="IzmenaEtikete.xaml.cs">
+      <DependentUpon>IzmenaEtikete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IzmenaSpomenika.xaml.cs">
+      <DependentUpon>IzmenaSpomenika.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListViewEtikete.xaml.cs">
       <DependentUpon>ListViewEtikete.xaml</DependentUpon>
     </Compile>
@@ -126,13 +135,26 @@
     <Compile Include="ViewHandlers\FormEtiketa.cs" />
     <Compile Include="ViewHandlers\FormSpomenik.cs" />
     <Compile Include="ViewHandlers\FormTip.cs" />
+    <Compile Include="ViewHandlers\ModifikacijaSpomenika.cs" />
+    <Compile Include="ViewHandlers\ModifikacijaEtikete.cs" />
+    <Compile Include="ViewHandlers\ModifikacijaEtiketeUspesno.cs" />
     <Compile Include="ViewHandlers\NeuspesnoEtiketaHandler.cs" />
+    <Compile Include="ViewHandlers\NeuspesnoTipHandler.cs" />
     <Compile Include="ViewHandlers\OdabirEtiketeViewHandler.cs" />
     <Compile Include="ViewHandlers\OdabirTipaViewHandler.cs" />
     <Compile Include="ViewHandlers\SideBarHandler.cs" />
     <Compile Include="ViewHandlers\UspesnoEtiketa.cs" />
+    <Compile Include="ViewHandlers\UspesnoTip.cs" />
     <Compile Include="ViewHandlers\ViewHandler.cs" />
     <Compile Include="ViewHandlers\ViewHandlerFactoty.cs" />
+    <Page Include="IzmenaEtikete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IzmenaSpomenika.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListViewEtikete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

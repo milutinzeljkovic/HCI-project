@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProjectHCI.Models
 {
-	class Monument
+	public class Monument
 	{
 
 		public Monument()
 		{
-			this.Etikete = new List<Etiketa>();
+			
 		}
 
 
@@ -55,41 +55,43 @@ namespace ProjectHCI.Models
 			set { datum = value; }
 		}
 
-		private bool unesco;
+		private string unesco;
 
-		public bool Unesco
+		public string Unesco
 		{
 			get { return unesco; }
 			set { unesco = value; }
 		}
 
-		private bool naseljenoMesto;
+		private string naseljenoMesto;
 
-		public bool NaseljenoMesto
+		public string NaseljenoMesto
 		{
 			get { return naseljenoMesto; }
 			set { naseljenoMesto = value; }
 		}
 
-		private bool obradjen;
+		private string obradjen;
 
-		public bool Obradjen
+		public string Obradjen
 		{
 			get { return obradjen; }
 			set { obradjen = value; }
 		}
 
-		private List<Etiketa> etikete;
-				
-		public List<Etiketa> Etikete
+
+		private  string etikete;
+
+		public string Etikete
 		{
 			get { return etikete; }
 			set { etikete = value; }
 		}
 
-		private Tip tip;
 
-		public Tip Tip
+		private string tip;
+
+		public string Tip
 		{
 			get { return tip; }
 			set { tip = value; }
@@ -111,9 +113,9 @@ namespace ProjectHCI.Models
 			set { turistickiStatus = value; }
 		}
 
-		private int prihod;
+		private string prihod;
 
-		public int Prihod
+		public string Prihod
 		{
 			get { return prihod; }
 			set { prihod = value; }

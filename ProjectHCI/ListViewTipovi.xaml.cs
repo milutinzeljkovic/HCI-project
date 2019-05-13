@@ -25,9 +25,8 @@ namespace ProjectHCI
 		public ListViewTipovi()
 		{
 			InitializeComponent();
-			List<Tip> items = TipControler.fetchTip();
 			
-			lvUsers.ItemsSource = items;
+			lvUsers.ItemsSource = MainWindow.Instance().ListTipovi;
 
 			
 
@@ -37,9 +36,17 @@ namespace ProjectHCI
 		{
 			Console.WriteLine("klik odabir");
 			String prikaz = lvUsers.SelectedItem == null ? "" : ((Tip)lvUsers.SelectedItem).Oznaka;
-			
-			MainWindow.Instance().tbTip.Text = prikaz;
-			Observers.App.Instance().State = "form_spomenik";
+			Console.WriteLine(Observers.App.Instance().State);
+			if(Observers.App.Instance().PreviousState== "izmena_spomenika")
+			{
+				IzmenaSpomenika.Instance().tbTip.Text = prikaz;
+			}
+			else
+			{
+				MainWindow.Instance().tbTip.Text = prikaz;
+				Observers.App.Instance().State = "form_spomenik";
+			}
+			Observers.App.Instance().PreviousState = "";
 			this.Close();
 			
 		}

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectHCI.Models
 {
-	class Tip
+	public class Tip
 	{
 		private string oznaka;
 

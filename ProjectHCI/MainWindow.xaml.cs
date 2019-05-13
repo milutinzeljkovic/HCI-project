@@ -39,6 +39,7 @@ namespace ProjectHCI
         private string unetiTextIme;
         private string etiketaOznaka;
         private string unetiTextOznaka;
+		public Dictionary<string, string> dictionary;
 
 		private static MainWindow mainInstance = null;
 
@@ -62,6 +63,186 @@ namespace ProjectHCI
 		{
 			return mainInstance;
 		}
+
+		private string sOznaka;
+		public string SOznaka
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxOznaka.Text;
+			});
+			set { sOznaka = value; }
+		}
+
+		private string sIme;
+		public string SIme
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxIme.Text;
+			});
+			set { sIme = value; }
+		}
+
+		private string sOpis;
+		public string SOpis
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxOpis.Text;
+			});
+			set { sOpis = value; }
+		}
+
+		private string sPrihod;
+		public string SPrihod
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textBoxPrihod.Text;
+			});
+			set { sPrihod = value; }
+		}
+
+		private string sTStatus;
+		public string STStatus
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return comboBoxT.SelectedItem.ToString();
+			});
+			set { sTStatus = value; }
+		}
+
+		private string sEra;
+		public string SEra
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return comboBoxEra.SelectedItem.ToString();
+			});
+			set { sEra = value; }
+		}
+
+		private string sEtikete;
+		public string SEtikete
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return tbEtiketa.Text;
+			});
+			set { sEtikete = value; }
+		}
+
+		private string sTipovi;
+		public string STipovi
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return tbTip.Text;
+			});
+			set { sTipovi = value; }
+		}
+
+		private string sSLika;
+		public string SSlika
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return sSLika;
+			});
+			set { sSLika = value; }
+		}
+
+		private string sUnesco;
+		public string SUnesco
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return sUnesco;
+			});
+			set
+			{
+				sUnesco = value;
+				
+			}
+		}
+
+		private string sNaseljenoMesto;
+		public string SNaseljenoMesto
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return sNaseljenoMesto;
+			});
+			set
+			{
+				sNaseljenoMesto = value;
+
+			}
+		}
+
+
+		private string sDate;
+		public string SDate
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return sDate;
+			});
+			set
+			{
+				sDate = value;
+
+			}
+		}
+
+		private string sObradjen;
+		public string SObradjen
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return sObradjen;
+			});
+			set
+			{
+				sObradjen = value;
+
+			}
+		}
+
+
+
+		private void handleCheck1(object sender, RoutedEventArgs e)
+		{
+			RadioButton rb = sender as RadioButton;
+			SUnesco = (string)rb.Content;
+		}
+
+		private void dateChanged(object sender, RoutedEventArgs e)
+		{
+			var calendar = sender as Calendar;
+
+			if (calendar.SelectedDate.HasValue)
+			{
+				SDate = calendar.SelectedDate.ToString();
+			}
+		}
+
+		private void handleCheck2(object sender, RoutedEventArgs e)
+		{
+			RadioButton rb = sender as RadioButton;
+			SNaseljenoMesto = (string)rb.Content;
+		}
+
+		private void handleCheck3(object sender, RoutedEventArgs e)
+		{
+			CheckBox cb = sender as CheckBox;
+			SObradjen = cb.Content.ToString();
+			
+		}
+
+
 
 		private string eOznaka;
 		public string EOznaka
@@ -93,7 +274,6 @@ namespace ProjectHCI
 			set { eBoja = value; }
 		}
 
-
 		private bool btnE = true;
 
 		public bool BtnAddEtiketu
@@ -113,6 +293,71 @@ namespace ProjectHCI
 
 		}
 
+		public bool BtnAddTip
+		{
+			get => btnE;
+			set => this.Dispatcher.Invoke(() =>
+			{
+				if (value == true)
+				{
+					buttonAddTip.IsEnabled = true;
+				}
+				else
+				{
+					buttonAddTip.IsEnabled = false;
+				}
+			});
+
+		}
+
+
+
+		private string tOznaka;
+
+		public string TOznaka
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textboxOznakaTip.Text;
+			});
+			set { tOznaka = value; }
+		}
+
+		private string tOpis;
+
+		public string TOpis
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textboxOpisTip.Text;
+			});
+			set { tOpis = value; }
+		}
+
+		private string tSlika;
+
+		public string TSlika
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return "slika";
+			});
+			set { tSlika = value; }
+		}
+
+		private string tIme;
+
+		public string TIme
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return textboxImeTip.Text;
+			});
+			set { tIme = value; }
+		}
+
+
+
 
 
 
@@ -130,6 +375,12 @@ namespace ProjectHCI
             set;
         }
 
+		public static ObservableCollection<Tip> Tipovi
+		{
+			get;
+			set;
+		}
+
         
 
         public MainWindow()
@@ -144,6 +395,9 @@ namespace ProjectHCI
 			new MainPageObserver(app);
 			new SideBarObserver(app);
 			app.State = "state";
+
+			
+			
 
 
 			Console.WriteLine(instance.observers.Count());
@@ -172,6 +426,8 @@ namespace ProjectHCI
             Etikete.Add(new Etiketa { Opis = "opis jedne etikete", Oznaka = "oznaka123" });
             Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
             Etikete.Add(new Etiketa { Opis = "opis druge etikete", Oznaka = "oznaka321" });
+
+			Tipovi = new ObservableCollection<Tip>();
 
 
             Spomenici = new ObservableCollection<Spomenik>();
@@ -247,7 +503,7 @@ namespace ProjectHCI
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            this.DataContext = GridViewModel;
+			/*this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridForm2Visible;
 
             (this.DataContext as GridViewModel).GridFormVisible = false;
@@ -257,32 +513,65 @@ namespace ProjectHCI
             (this.DataContext as GridViewModel).GridTipVisible = false;
             (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
             (this.DataContext as GridViewModel).GridForm2Visible = true;
-            this.DataContext = this;
+            this.DataContext = this;*/
+
+			Observers.App.Instance().State = "initial_state";
+			ControllerFactory factory = new ControllerFactory();
+			factory.GetController("getSpomenike").handle();
+		
+
+
+
         }
 
         private void PretragaEtiketeClick(object sender, RoutedEventArgs e)
         {
-            this.DataContext = GridViewModel;
-            var vis = (this.DataContext as GridViewModel).GridForm2Visible;
-
-            (this.DataContext as GridViewModel).GridFormVisible = false;
-            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
-            (this.DataContext as GridViewModel).GridMapVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
-            (this.DataContext as GridViewModel).GridTipVisible = false;
-            (this.DataContext as GridViewModel).GridForm2Visible = false;
-            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
-            this.DataContext = this;
-            this.DataContext = GridViewModel;
-            var s = new TabelaEtiketa();
-            s.Show();
-            //tabela spomenika prekrije ovu tabelu
+			//Observers.App.Instance().State = "izmena_etiketa";
+			Observers.App.Instance().State = "izmena_etiketa";
+			ControllerFactory factory = new ControllerFactory();
+			factory.GetController("getEtikete").handle();
+			
 
         }
+		
+		private void btnAddSpomenik(object sender, RoutedEventArgs e)
+		{
+			dictionary = new Dictionary<string, string>();
+			Console.WriteLine("etikete: " + SEtikete);
+
+			dictionary.Add("ime", SIme);
+			dictionary.Add("opis", SOpis);
+			dictionary.Add("oznaka", SOznaka);
+			dictionary.Add("era", SEra);
+			dictionary.Add("unesco", SUnesco);
+			dictionary.Add("date", SDate);
+			dictionary.Add("status", STStatus);
+			dictionary.Add("obradjen", SObradjen);
+			dictionary.Add("etikete", SEtikete);
+			dictionary.Add("tipovi", STipovi);
+			dictionary.Add("prihod", SPrihod);
+			dictionary.Add("ikonica", SSlika);
+			dictionary.Add("naselje", SNaseljenoMesto);
+			/*
+						Console.WriteLine(dictionary["ime"]);
+						Console.WriteLine(dictionary["opis"]);
+						Console.WriteLine(dictionary["oznaka"]);
+						Console.WriteLine(dictionary["era"]);
+						Console.WriteLine(dictionary["unesco"]);
+						Console.WriteLine(dictionary["date"]);
+						Console.WriteLine(dictionary["obradjen"]);
+						Console.WriteLine(dictionary["prihod"]);
+						Console.WriteLine(dictionary["ikonica"]);
+						Console.WriteLine(dictionary["tipovi"]);
+						Console.WriteLine(dictionary["etikete"]);*/
+			Controller controller = (new ControllerFactory()).GetController("addSpomenik");
+			controller.handle();
 
 
+		}
 
-        private void Turtorial_click(object sender, RoutedEventArgs e)
+
+		private void Turtorial_click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -376,11 +665,9 @@ namespace ProjectHCI
 
 		private void buttonAddTipClick(object sender, RoutedEventArgs e)
 		{
-			Dictionary<string, string> dictionary = new Dictionary<string, string>();
-			dictionary.Add("oznaka", textboxOznakaTip.Text);
-			dictionary.Add("opis", textboxOpisTip.Text);
-			dictionary.Add("ime", textboxImeTip.Text);
-			(new FormDodajTipHandlers()).dodajTip(dictionary);
+			BtnAddTip = false;
+			ControllerFactory factory = new ControllerFactory();
+			(factory.GetController("addTip")).handle();
 		}
 
 
@@ -518,15 +805,55 @@ namespace ProjectHCI
    
         }
 
+		private List<Monument> listSpomenik;
+		public List<Monument> ListSpomenik
+		{
+			get { return listSpomenik; }
+			set => this.Dispatcher.Invoke(() =>
+			{
+				/*Etikete.Clear();
+				foreach (Etiketa item in value)
+				{
+					Etikete.Add(item);
+				}*/
+				this.listSpomenik = value;
+			});
+		}
+
+
+
 		private List<Etiketa> listEtikete;
 		public List<Etiketa> ListEtikete
 		{
 			get { return listEtikete; }
 			set => this.Dispatcher.Invoke(() =>
 			{
+				Etikete.Clear();
+				foreach (Etiketa item in value)
+				{
+					Etikete.Add(item);
+				}
 				this.listEtikete = value;
 			});
 		}
+
+		private List<Tip> list;
+
+		public List<Tip> ListTipovi
+		{
+			get { return list; }
+			set => this.Dispatcher.Invoke(() =>
+			{
+				Tipovi.Clear();
+				foreach (Tip item in value)
+				{
+					Tipovi.Add(item);
+				}
+				this.list = value;
+			});
+		}
+
+
 
 
 		private void buttonAddEtiketuClick(object sender, EventArgs e)
@@ -539,7 +866,9 @@ namespace ProjectHCI
 
 		private void btnOdaberiTipClick(object sender, EventArgs e)
 		{
-			Observers.App.Instance().State = "odabir_tipa";
+			ControllerFactory factory = new ControllerFactory();
+			Controller controller = factory.GetController("getTipove");
+			controller.handle();
 
 		}
 
