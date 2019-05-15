@@ -523,8 +523,9 @@ namespace ProjectHCI
 
 
         }
+		
 
-        private void PretragaEtiketeClick(object sender, RoutedEventArgs e)
+		private void PretragaEtiketeClick(object sender, RoutedEventArgs e)
         {
 			//Observers.App.Instance().State = "izmena_etiketa";
 			Observers.App.Instance().State = "izmena_etiketa";
@@ -533,7 +534,19 @@ namespace ProjectHCI
 			
 
         }
-		
+
+		private void PretragaTipovaClick(object sender, RoutedEventArgs e)
+		{
+			//Observers.App.Instance().State = "izmena_etiketa";
+			Observers.App.Instance().State = "izmena_tipa";
+			ControllerFactory factory = new ControllerFactory();
+			factory.GetController("getTipove").handle();
+
+
+		}
+
+
+
 		private void btnAddSpomenik(object sender, RoutedEventArgs e)
 		{
 			dictionary = new Dictionary<string, string>();
@@ -871,6 +884,34 @@ namespace ProjectHCI
 			controller.handle();
 
 		}
+		string tipOznaka;
+		private void textBoxTipOznakaLost(object sender, EventArgs e)
+		{
+			tipOznaka = textBoxEtiketaOznaka.Text;
+			// do your stuff
+			if (textboxOznakaTip.Text == "")
+			{
+				textboxOznakaTip.BorderBrush = Brushes.Red;
+				textboxOznakaTip.Text = "Obavezno polje";
+				textboxOznakaTip.Foreground = Brushes.Red;
+
+			}
+			else
+			{
+
+				textBoxEtiketaOznaka.BorderBrush = color;
+			}
+		}
+
+		private void textBoxTipOznakaGot(object sender, EventArgs e)
+		{
+			textboxOznakaTip.Text = tipOznaka;
+			textboxOznakaTip.Foreground = Brushes.Black;
+			textboxOznakaTip.BorderBrush = color;
+
+		}
+
+
 
 
 		private void textBoxEtiketaOznakaLost(object sender, EventArgs e)

@@ -75,6 +75,14 @@ namespace ProjectHCI.Observers
 			{
 				(factoty.GetViewHandler("ModifikacijaSpomenika")).HandleView();
 			}
+			else if(app.State == "modifikacija_tipa")
+			{
+				(factoty.GetViewHandler("ModifikacijaTipa")).HandleView();
+			}
+			else if(app.State == "modifikacija_tipa_uspesno")
+			{
+				(factoty.GetViewHandler("ModifikacijaTipaUspesno")).HandleView();
+			}
 
 
 		}

@@ -25,6 +25,19 @@ namespace ProjectHCI
 		private Dictionary<string, int> comboEra;
 		private Dictionary<string, int> comboTuristickiStatus;
 
+		private Monument spomenik;
+
+		public Monument Spomenik
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return spomenik;
+			});
+			set { spomenik = value; }
+		}
+
+
+
 		private string oznaka;
 
 		public string Oznaka
@@ -200,6 +213,7 @@ namespace ProjectHCI
 			comboEra = new Dictionary<string, int>();
 			comboTuristickiStatus = new Dictionary<string, int>();
 			lvUsers.ItemsSource = MainWindow.Instance().ListSpomenik;
+			
 			instance = this;
 			comboTuristickiStatus.Add("Eksploatisan", 0);
 			comboTuristickiStatus.Add("Dostupan", 1);
@@ -224,8 +238,6 @@ namespace ProjectHCI
 			}
 			else
 			{
-
-
 				textBoxIme.Text = monument.Ime;
 				textBoxOpis.Text = monument.Opis;
 				textBoxOznaka.Text = monument.Oznaka;
@@ -323,6 +335,22 @@ namespace ProjectHCI
 
 
 		}
+
+		private void brisanje_click(object sender, RoutedEventArgs e)
+		{
+			Monument monument = ((Monument)lvUsers.SelectedItem);
+			if(monument!=null)
+			{
+				this.spomenik = monument;
+				ControllerFactory factory = new ControllerFactory();
+				Controller controller = factory.GetController("deleteSpomenik");
+				controller.handle();
+			}
+
+
+
+		}
+
 		private void add_click(object sender, RoutedEventArgs e)
 		{
 			ControllerFactory factory = new ControllerFactory();

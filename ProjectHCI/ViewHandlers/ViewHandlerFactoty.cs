@@ -40,6 +40,10 @@ namespace ProjectHCI.ViewHandlers
 					return new ModifikacijaEtiketeUspesno();
 				case "ModifikacijaSpomenika":
 					return new ModifikacijaSpomenika();
+				case "ModifikacijaTipa":
+					return new ModifikacijaTipa();
+				case "ModifikacijaTipaUspesno":
+					return new ModifikacijaTipaUspesno();
 				default:
 					return null;
 			}

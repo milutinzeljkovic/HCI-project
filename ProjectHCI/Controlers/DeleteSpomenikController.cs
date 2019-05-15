@@ -1,21 +1,22 @@
 ﻿using MySql.Data.MySqlClient;
 using ProjectHCI.DBCredentials;
-using ProjectHCI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectHCI.Controlers
 {
-	class GetTipoveController : Controller
+	class DeleteSpomenikController : Controller
 	{
 		private static BackgroundWorker backgroundWorker;
-
+		private Dictionary<string, Dictionary<string, string>> resultSet;
 		public void handle()
 		{
+			resultSet = new Dictionary<string, Dictionary<string, string>>();
 			backgroundWorker = new BackgroundWorker
 
 			{
@@ -27,13 +28,16 @@ namespace ProjectHCI.Controlers
 			backgroundWorker.DoWork += doWork;
 			backgroundWorker.RunWorkerCompleted += workCompleted;
 			backgroundWorker.ProgressChanged += backgroundWorker_ProgressChanged;
+
 			backgroundWorker.RunWorkerAsync("Press Enter in the next 5 seconds to Cancel operation:");
 			Console.ReadLine();
+
+
+
 		}
 
 		private void doWork(object sender, DoWorkEventArgs e)
 		{
-
 			DBCredential db = DBCredential.Instance();
 			var dbCon = DBConnection.Instance();
 			dbCon.DatabaseName = db.Database;
@@ -41,23 +45,17 @@ namespace ProjectHCI.Controlers
 			dbCon.Server = db.Server;
 			dbCon.Password = "wU17KVpis3";
 
-			List<Tip> tipovi = new List<Tip>();
+
 
 			if (dbCon.IsConnect())
 			{
 				try
 				{
-					string query = "SELECT * FROM hci_tip_table";
+					string query = "delete from hci_spomenik_table where oznaka ='"+IzmenaSpomenika.Instance().Spomenik.Oznaka+"'";
 					var cmd = new MySqlCommand(query, dbCon.Connection);
-					var reader = cmd.ExecuteReader();
-
-					Console.WriteLine(reader);
-					while (reader.Read())
-					{
-						tipovi.Add(new Tip() { Oznaka = reader.GetString("oznaka"), Ime = reader.GetString("ime"), Opis = reader.GetString("opis"), Icon = reader.GetString("slika") });
-					}
+					var reader = cmd.ExecuteNonQuery();
 					dbCon.Close();
-					e.Result = tipovi;
+					e.Result = "uspesno";
 
 
 				}
@@ -85,30 +83,12 @@ namespace ProjectHCI.Controlers
 
 		private void workCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-
-			if ((List<Tip>)e.Result != null)
+			
+			if(e.Result.Equals("uspesno"))
 			{
-
-				MainWindow.Instance().ListTipovi = (List<Tip>)e.Result;
-				Observers.App app = Observers.App.Instance();
-				if (app.State == "izmena_tipa")
-				{
-					Observers.App.Instance().State = "modifikacija_tipa";
-				}
-				else
-				{
-					Observers.App.Instance().State = "odabir_tipa";
-				}
-
+				MessageBox.Show("Uspesno izbrisano!", "Obavestenje", MessageBoxButton.OK, MessageBoxImage.Information);
+				Observers.App.Instance().State = "inital_state";
 			}
-
-			else
-			{
-
-
-			}
-
 		}
-
 	}
 }

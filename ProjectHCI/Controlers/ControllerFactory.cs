@@ -28,6 +28,14 @@ namespace ProjectHCI.Controlers
 					return new GetSpomenikeControllercs();
 				case "updateSpomenik":
 					return new UpdateSpomenikCotroller();
+				case "updateTip":
+					return new UpdateTipController();
+				case "deleteSpomenik":
+					return new DeleteSpomenikController();
+				case "deleteTip":
+					return new DeleteTipController();
+				case "deleteEtiketa":
+					return new DeleteEtiketaController();
 				default:
 					return null;
 			}

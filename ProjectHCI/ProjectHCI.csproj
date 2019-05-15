@@ -92,6 +92,9 @@
     <Compile Include="Controlers\Controller.cs" />
     <Compile Include="Controlers\ControllerFactory.cs" />
     <Compile Include="Controlers\DBConnection.cs" />
+    <Compile Include="Controlers\DeleteEtiketaController.cs" />
+    <Compile Include="Controlers\DeleteSpomenikController.cs" />
+    <Compile Include="Controlers\DeleteTipController.cs" />
     <Compile Include="Controlers\EtiketaControler.cs" />
     <Compile Include="Controlers\GetEtiketeController.cs" />
     <Compile Include="Controlers\GetSpomenikeController.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Controlers\TipControler.cs" />
     <Compile Include="Controlers\UpdateEtiketuController.cs" />
     <Compile Include="Controlers\UpdateSpomenikCotroller.cs" />
+    <Compile Include="Controlers\UpdateTipController.cs" />
     <Compile Include="DBCredentials\DBCredentials.cs" />
     <Compile Include="EtiketaObserver.cs" />
     <Compile Include="EventHandlers\FormDodajSpomenikHandlers.cs" />
@@ -109,6 +113,9 @@
     </Compile>
     <Compile Include="IzmenaSpomenika.xaml.cs">
       <DependentUpon>IzmenaSpomenika.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IzmenaTipa.xaml.cs">
+      <DependentUpon>IzmenaTipa.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListViewEtikete.xaml.cs">
       <DependentUpon>ListViewEtikete.xaml</DependentUpon>
@@ -138,6 +145,8 @@
     <Compile Include="ViewHandlers\ModifikacijaSpomenika.cs" />
     <Compile Include="ViewHandlers\ModifikacijaEtikete.cs" />
     <Compile Include="ViewHandlers\ModifikacijaEtiketeUspesno.cs" />
+    <Compile Include="ViewHandlers\ModifikacijaTipa.cs" />
+    <Compile Include="ViewHandlers\ModifikacijaTipaUspesno.cs" />
     <Compile Include="ViewHandlers\NeuspesnoEtiketaHandler.cs" />
     <Compile Include="ViewHandlers\NeuspesnoTipHandler.cs" />
     <Compile Include="ViewHandlers\OdabirEtiketeViewHandler.cs" />
@@ -152,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IzmenaSpomenika.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IzmenaTipa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

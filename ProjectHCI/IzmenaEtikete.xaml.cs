@@ -21,6 +21,18 @@ namespace ProjectHCI
 	/// </summary>
 	public partial class IzmenaEtikete : Window
 	{
+
+		private Etiketa etiketa;
+
+		public Etiketa Etiketa
+		{
+			get => this.Dispatcher.Invoke(() =>
+			{
+				return etiketa;
+			});
+			set { etiketa = value; }
+		}
+
 		private string opis;
 		private static IzmenaEtikete instance = null;
 		public static IzmenaEtikete Instance()
@@ -95,6 +107,23 @@ namespace ProjectHCI
 		{
 			odabir_etikete.Visibility = Visibility.Visible;
 			izmena_etikete.Visibility = Visibility.Hidden;
+
+
+		}
+		private void brisanje(object sender, RoutedEventArgs e)
+		{
+
+			Etiketa et = ((Etiketa)lvUsers.SelectedItem);
+			if (et != null)
+			{
+				this.etiketa = et;
+				ControllerFactory factory = new ControllerFactory();
+				Controller c = factory.GetController("deleteEtiketa");
+				c.handle();
+			}
+
+			
+
 
 
 		}
