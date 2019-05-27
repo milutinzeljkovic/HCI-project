@@ -917,7 +917,29 @@
         </DockPanel>
 
         <DockPanel Width="1065px" Height="500px" DockPanel.Dock="Left" Margin="0,0,0,0" Visibility="{Binding Path=GridMapVisible, Converter={StaticResource BoolToVisConverter} }">
-            <Image Source="mapanovisad.jpg" Margin="0,0,100,100" />
+            <Grid Margin="0,0,0,0" Width="1000px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400px" />
+                    <RowDefinition Height="400px" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800px"/>
+                    <ColumnDefinition Width="350px"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="mapanovisad.jpg" Margin="10,10,10,10"  Grid.Column="0"/>
+                <ListView Margin="-15,0,0,0" Name="lvSpomenici" Grid.Row="0" Grid.Column="1" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Oznaka" Width="100" DisplayMemberBinding="{Binding Oznaka}" />
+                            <GridViewColumn Header="Ime" Width="100" DisplayMemberBinding="{Binding Ime}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+            </Grid>
+
+
+            
         </DockPanel>
 
 

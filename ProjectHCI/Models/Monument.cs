@@ -13,6 +13,22 @@ namespace ProjectHCI.Models
 		{
 			
 		}
+		private double x;
+
+		public double X
+		{
+			get { return x; }
+			set { x = value; }
+		}
+
+		private double y;
+
+		public double Y
+		{
+			get { return y; }
+			set { y = value; }
+		}
+
 
 
 		private string oznaka;

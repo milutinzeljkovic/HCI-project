@@ -1,24 +1,24 @@
-﻿using MySql.Data.MySqlClient;
-using ProjectHCI.DBCredentials;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using ProjectHCI.DBCredentials;
 using ProjectHCI.Models;
 
 namespace ProjectHCI.Controlers
 {
-	class GetSpomenikeControllercs :  Controller
+	class Load
 	{
 		private static BackgroundWorker backgroundWorker;
-		private Dictionary<string, Dictionary<string,string>> resultSet;
+		private Dictionary<string, Dictionary<string, string>> resultSet;
 		Dictionary<string, List<double>> positions = new Dictionary<string, List<double>>();
 
 		public void handle()
 		{
-			resultSet = new Dictionary<string, Dictionary<string,string>>();
+			resultSet = new Dictionary<string, Dictionary<string, string>>();
 			backgroundWorker = new BackgroundWorker
 
 			{
@@ -47,7 +47,7 @@ namespace ProjectHCI.Controlers
 			dbCon.Server = db.Server;
 			dbCon.Password = "wU17KVpis3";
 
-			
+
 
 			if (dbCon.IsConnect())
 			{
@@ -59,8 +59,8 @@ namespace ProjectHCI.Controlers
 					var cmd = new MySqlCommand(query, dbCon.Connection);
 					var reader = cmd.ExecuteReader();
 
-					
-					
+
+
 
 
 					Console.WriteLine(reader);
@@ -69,7 +69,7 @@ namespace ProjectHCI.Controlers
 
 						Console.WriteLine(reader.GetString("oznaka"));
 						//etikete.Add(new Etiketa() { Oznaka = reader.GetString("id_oznaka"), Opis = reader.GetString("opis"), Boja = reader.GetString("boja") });
-						if(!resultSet.ContainsKey(reader.GetString("oznaka")))
+						if (!resultSet.ContainsKey(reader.GetString("oznaka")))
 						{
 							Dictionary<string, string> values = new Dictionary<string, string>();
 							values.Add("ime", reader.GetString("ime"));
@@ -98,7 +98,7 @@ namespace ProjectHCI.Controlers
 									Console.WriteLine("etiketa:     " + reader.GetString("oznaka_etikete"));
 									values.Add("oznaka_etikete", reader.GetString("oznaka_etikete"));
 								}
-								
+
 
 							}
 							catch (Exception exe)
@@ -185,8 +185,9 @@ namespace ProjectHCI.Controlers
 
 		private void workCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
+			//Console.WriteLine("zavrsio              " + resultSet["232"]["oznaka_etikete"]);
 			List<Monument> spomenici = new List<Monument>();
-			foreach (KeyValuePair<string, Dictionary<string,string>> entry in resultSet)
+			foreach (KeyValuePair<string, Dictionary<string, string>> entry in resultSet)
 			{
 				Monument m = new Monument();
 				m.Oznaka = entry.Key;
@@ -203,7 +204,7 @@ namespace ProjectHCI.Controlers
 				m.EraPorekla = entry.Value["era"];
 				m.TuristickiStatus = entry.Value["turisticki_status"];
 				spomenici.Add(m);
-				if(positions.ContainsKey(m.Oznaka))
+				if (positions.ContainsKey(m.Oznaka))
 				{
 					m.X = positions[m.Oznaka][0];
 					m.Y = positions[m.Oznaka][1];
@@ -217,29 +218,7 @@ namespace ProjectHCI.Controlers
 
 
 			}
-
-
-
-
 			MainWindow.Instance().ListSpomenik = spomenici;
-			Observers.App.Instance().State = "modifikacija_spomenika";
-
-
-			/*
-			 * 
-			 * values.Add("ime", reader.GetString("ime"));
-							values.Add("opis", reader.GetString("opis"));
-							values.Add("tip", reader.GetString("tip"));
-							values.Add("era", reader.GetString("era"));
-							values.Add("turisticki_status", reader.GetString("turisticki_status"));
-							values.Add("prihod", reader.GetString("prihod"));
-							values.Add("unesco", reader.GetString("unesco"));
-							values.Add("naseljeno_mesto", reader.GetString("naseljeno_mesto"));
-							values.Add("datum_otkrivanja", reader.GetString("datum_otkrivanja"));
-							values.Add("ikonica", reader.GetString("ikonica"));
-							values.Add("obradjen", reader.GetString("obradjen"));
-				*/
-
 
 
 

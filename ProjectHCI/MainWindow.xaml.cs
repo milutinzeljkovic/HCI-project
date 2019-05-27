@@ -387,6 +387,10 @@ namespace ProjectHCI
         {
             InitializeComponent();
 			mainInstance = this;
+			Load l = new Load();
+			l.handle();
+
+
 			Subject instance = Subject.Instance();
 			new EtiketaObserver(instance);
 			new TipObserver(ref instance);
@@ -484,24 +488,99 @@ namespace ProjectHCI
 			(this.DataContext as GridViewModel).GridTipVisible = true;
 		}
 
-        
+
+		Point start = new Point();
 
         private void ShowMap_Click(object sender, RoutedEventArgs e)
         {
-            this.DataContext = GridViewModel;
-            var vis = (this.DataContext as GridViewModel).GridForm2Visible;
+			/* this.DataContext = GridViewModel;
+			 var vis = (this.DataContext as GridViewModel).GridForm2Visible;
 
-            (this.DataContext as GridViewModel).GridFormVisible = false;
-            (this.DataContext as GridViewModel).GridFormPart2Visible = false;
-            (this.DataContext as GridViewModel).GridEtiketaVisible = false;
-            (this.DataContext as GridViewModel).GridForm2Visible = false;
-            (this.DataContext as GridViewModel).GridTipVisible = false;
-            (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
-            (this.DataContext as GridViewModel).GridMapVisible = true;
+			 (this.DataContext as GridViewModel).GridFormVisible = false;
+			 (this.DataContext as GridViewModel).GridFormPart2Visible = false;
+			 (this.DataContext as GridViewModel).GridEtiketaVisible = false;
+			 (this.DataContext as GridViewModel).GridForm2Visible = false;
+			 (this.DataContext as GridViewModel).GridTipVisible = false;
+			 (this.DataContext as GridViewModel).GridEtiketaTableVisible = false;
+			 (this.DataContext as GridViewModel).GridMapVisible = true;
 
-        }
+			 lvSpomenici.ItemsSource = this.ListSpomenik;
+			 */
+			var s = new Map();
+			s.Show();
+			
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+
+		}
+
+		private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			Console.WriteLine("mis kliknuo");
+			start = e.GetPosition(null);
+		}
+
+
+		private void ListView_MouseMove(object sender, MouseEventArgs e)
+		{
+
+			Point mousePos = e.GetPosition(null);
+			Vector diff = start - mousePos;
+
+			if (e.LeftButton == MouseButtonState.Pressed &&
+				(Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+				Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+			{
+				// Get the dragged ListViewItem
+				ListView listView = sender as ListView;
+				ListViewItem listViewItem =
+					FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
+
+				// Find the data behind the ListViewItem
+				Monument m = (Monument)listView.SelectedItem;
+
+				// Initialize the drag & drop operation
+				DataObject dragData = new DataObject("myFormat", m);
+				DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+			}
+		}
+
+
+		private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+		{
+			do
+			{
+				if (current is T)
+				{
+					return (T)current;
+				}
+				current = VisualTreeHelper.GetParent(current);
+			}
+			while (current != null);
+			return null;
+		}
+
+		private void ListView_DragEnter(object sender, DragEventArgs e)
+		{
+			if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
+			{
+				e.Effects = DragDropEffects.None;
+			}
+		}
+
+		private void ListView_Drop(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent("myFormat"))
+			{
+				
+			}
+		}
+
+
+
+
+
+
+		private void Search_Click(object sender, RoutedEventArgs e)
         {
 			/*this.DataContext = GridViewModel;
             var vis = (this.DataContext as GridViewModel).GridForm2Visible;

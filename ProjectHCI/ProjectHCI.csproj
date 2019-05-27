@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controlers\AddEtiketuController.cs" />
+    <Compile Include="Controlers\AddKordinate.cs" />
     <Compile Include="Controlers\AddSpomenikController.cs" />
     <Compile Include="Controlers\AddTipController.cs" />
     <Compile Include="Controlers\Controller.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Controlers\GetSpomenikeController.cs" />
     <Compile Include="Controlers\GetSpomenikeControllercs.cs" />
     <Compile Include="Controlers\GetTipoveController.cs" />
+    <Compile Include="Controlers\Load.cs" />
     <Compile Include="Controlers\TipControler.cs" />
     <Compile Include="Controlers\UpdateEtiketuController.cs" />
     <Compile Include="Controlers\UpdateSpomenikCotroller.cs" />
@@ -122,6 +124,9 @@
     </Compile>
     <Compile Include="ListViewTipovi.xaml.cs">
       <DependentUpon>ListViewTipovi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Etiketa.cs" />
     <Compile Include="Models\Monument.cs" />
@@ -188,6 +193,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TabelaEtiketa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

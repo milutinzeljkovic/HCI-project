@@ -339,6 +339,8 @@ namespace ProjectHCI
 		private void brisanje_click(object sender, RoutedEventArgs e)
 		{
 			Monument monument = ((Monument)lvUsers.SelectedItem);
+		
+
 			if(monument!=null)
 			{
 				this.spomenik = monument;

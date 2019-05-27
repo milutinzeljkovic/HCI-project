@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectHCI.Models;
 
 namespace ProjectHCI.Controlers
 {
@@ -99,6 +100,26 @@ namespace ProjectHCI.Controlers
 
 			if ((string)e.Result == "uspesno")
 			{
+				Dictionary<string, string> dictionary = MainWindow.Instance().dictionary;
+				//+ dictionary["oznaka"] + "', '" + dictionary["ime"] + "', '" + dictionary["opis"] + "', '" +
+				//dictionary["tipovi"] + "', '" + dictionary["era"] + "', '" + dictionary["status"] + "', '" + dictionary["prihod"] + "', '" + dictionary["unesco"] + 
+				//"', '" + dictionary["naselje"] + "', '" + dictionary["date"] + "', '" + dictionary["ikonica"] + "', '" + dictionary["obradjen"] + 
+				//
+				Monument m = new Monument();
+				m.Datum = dictionary["date"];
+				m.Oznaka = dictionary["oznaka"];
+				m.Ime = dictionary["ime"];
+				m.Opis = dictionary["opis"];
+				m.Tip = dictionary["tipovi"];
+				m.EraPorekla = dictionary["era"];
+				m.TuristickiStatus = dictionary["status"];
+				m.Prihod = dictionary["prihod"];
+				m.Unesco = dictionary["unesco"];
+				m.NaseljenoMesto = dictionary["naselje"];
+				m.Slika = dictionary["ikonica"];
+				m.Obradjen = dictionary["obradjen"];
+				MainWindow.Instance().ListSpomenik.Add(m);
+
 				Observers.App.Instance().State = "uspesno_etiketa";
 				Console.WriteLine("completed");
 
