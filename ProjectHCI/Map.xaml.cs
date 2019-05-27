@@ -26,6 +26,7 @@ namespace ProjectHCI
 
 	public partial class Map : Window
     {
+		Monument selected=null;
 		Point startPoint = new Point();
 		public ObservableCollection<Monument> Spomenici
 		{
@@ -97,10 +98,34 @@ namespace ProjectHCI
 					img.Width = 50;
 					img.Height = 50;
 					img.Tag = m.Oznaka;
+					img.PreviewMouseLeftButtonDown += DraggedImagePreviewMouseLeftButtonDown;
+					img.MouseMove += DraggedImageMouseMove;
 
+					WrapPanel wp = new WrapPanel();
+					
+					wp.Orientation = Orientation.Vertical;
+
+					TextBox oznaka = new TextBox();
+					oznaka.IsEnabled = false;
+					oznaka.Text = "Oznaka: " + m.Oznaka;
+					wp.Children.Add(oznaka);
+
+					TextBox naziv = new TextBox();
+					naziv.IsEnabled = false;
+					naziv.Text = "Naziv: " + m.Ime;
+					wp.Children.Add(naziv);
+
+
+					TextBox tip = new TextBox();
+					tip.IsEnabled = false;
+					tip.Text = "Tip: " + m.Tip;
+					wp.Children.Add(tip);
+
+					ToolTip tt = new ToolTip();
+					tt.Content = wp;
+					img.ToolTip = tt;
 
 					Spomenici.Remove(m);
-					ToolTip tt = new ToolTip();
 					img.ToolTip = tt;
 					canvasMap.Children.Add(img);
 					Canvas.SetLeft(img, m.X - 20);
@@ -132,6 +157,70 @@ namespace ProjectHCI
 			}
 		}
 
+		private void DraggedImagePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			Console.WriteLine("dogadjaj neki");
+			startPoint = e.GetPosition(null);
+			Image img = sender as Image;
+
+			foreach (Monument man in MainWindow.Instance().ListSpomenik)
+			{
+				if (man.Oznaka.Equals(img.Tag))
+				{
+
+					selected = (Monument)man;
+				}
+			}
+			if (e.LeftButton == MouseButtonState.Released)
+				e.Handled = true;
+
+		}
+
+		private void DraggedImageMouseMove(object sender, MouseEventArgs e)
+		{
+			System.Windows.Point mousePos = e.GetPosition(null);
+			Vector diff = startPoint - mousePos;
+			if (e.LeftButton == MouseButtonState.Pressed &&
+			   (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+			   Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+			{
+
+
+				Monument selektovana = (Monument)selected;
+
+				if (selektovana != null)
+				{
+					Image img = sender as Image;
+					canvasMap.Children.Remove(img);
+					DataObject dragData = new DataObject("myFormat", selektovana);
+					DragDrop.DoDragDrop(img, dragData, DragDropEffects.Move);
+
+				}
+
+			}
+
+		}
+
+		private void delete(object sender, EventArgs e)
+		{
+			if(selected!= null)
+			{
+				DeleteSpomenikMapa d = new DeleteSpomenikMapa();
+				d.handle(selected);
+				Image zaBrisanje = null;
+				foreach (Image img in canvasMap.Children)
+				{
+					if (selected.Oznaka.Equals(img.Tag))
+					{
+						zaBrisanje = img;
+					}
+				}
+				if (zaBrisanje != null)
+					canvasMap.Children.Remove(zaBrisanje);
+			}
+		}
+
+
 		private void ListView_Drop(object sender, DragEventArgs e)
 		{
 			Console.WriteLine("drop");
@@ -156,9 +245,34 @@ namespace ProjectHCI
 				{
 					img.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
 				}
+				WrapPanel wp = new WrapPanel();
+				wp.Orientation = Orientation.Vertical;
+
+				TextBox oznaka = new TextBox();
+				oznaka.IsEnabled = false;
+				oznaka.Text = "Oznaka: " + m.Oznaka;
+				wp.Children.Add(oznaka);
+
+				TextBox naziv = new TextBox();
+				naziv.IsEnabled = false;
+				naziv.Text = "Naziv: " + m.Ime;
+				wp.Children.Add(naziv);
+
+
+				TextBox tip = new TextBox();
+				tip.IsEnabled = false;
+				tip.Text = "Tip: " + m.Tip;
+				wp.Children.Add(tip);
+
+				ToolTip tt = new ToolTip();
+				tt.Content = wp;
+				img.ToolTip = tt;
 				img.Width = 50;
 				img.Height = 50;
 				img.Tag = m.Oznaka;
+
+				img.PreviewMouseLeftButtonDown += DraggedImagePreviewMouseLeftButtonDown;
+				img.MouseMove += DraggedImageMouseMove;
 				var positionX = e.GetPosition(canvasMap).X;
 				var positionY = e.GetPosition(canvasMap).Y;
 
@@ -166,12 +280,18 @@ namespace ProjectHCI
 				m.Y = (double)positionY;
 
 				AddKordinate a = new AddKordinate();
+				UpdateKordinate u = new UpdateKordinate();
 
-				a.handle(m);
+				if(selected==null)
+				{
+					a.handle(m);
+				}
+				else
+				{
+					u.handle(selected);
+				}
+				//a.handle(m);
 
-
-				ToolTip tt = new ToolTip();
-				img.ToolTip = tt;
 				canvasMap.Children.Add(img);
 				Canvas.SetLeft(img, positionX - 20);
 				Canvas.SetTop(img, positionY - 20);

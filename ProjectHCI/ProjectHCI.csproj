@@ -95,6 +95,7 @@
     <Compile Include="Controlers\DBConnection.cs" />
     <Compile Include="Controlers\DeleteEtiketaController.cs" />
     <Compile Include="Controlers\DeleteSpomenikController.cs" />
+    <Compile Include="Controlers\DeleteSpomenikMapa.cs" />
     <Compile Include="Controlers\DeleteTipController.cs" />
     <Compile Include="Controlers\EtiketaControler.cs" />
     <Compile Include="Controlers\GetEtiketeController.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Controlers\Load.cs" />
     <Compile Include="Controlers\TipControler.cs" />
     <Compile Include="Controlers\UpdateEtiketuController.cs" />
+    <Compile Include="Controlers\UpdateKordinate.cs" />
     <Compile Include="Controlers\UpdateSpomenikCotroller.cs" />
     <Compile Include="Controlers\UpdateTipController.cs" />
     <Compile Include="DBCredentials\DBCredentials.cs" />
