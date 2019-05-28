@@ -62,7 +62,7 @@
                     </TextBox.Resources>
                 </TextBox>
                 
-                <Button Grid.Row="1" Grid.Column="1" Height="30px" Width="80px" Margin="295.8,9.4,405.8,6.2" RenderTransformOrigin="0.231,0.307" Background="White" Name="buttonIkonicaTip" >
+                <Button Grid.Row="1" Grid.Column="1" Height="30px" Width="80px" Margin="295.8,9.4,405.8,6.2" RenderTransformOrigin="0.231,0.307" Background="White" Name="buttonIkonicaTip" Click="odabir_ikonice" >
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi
                     </Label>
@@ -146,7 +146,7 @@
                     <RowDefinition Height="350px"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <ListView Margin="0,10,0,0" Name="lvUsers" Grid.Row="0" Height="350px" >
+                <ListView Margin="0,10,0,0" Name="lvUsers" Grid.Row="0" Height="350px" SelectionChanged="select" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Ime" Width="120" DisplayMemberBinding="{Binding Ime}" />
@@ -172,7 +172,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Grid.Row="1"  Height="30px" Width="80px"  Margin="-200,0,0,0" Background="White"  Click="brisanje">
+                <Button Grid.Row="1"  Height="30px" Width="80px"  Margin="-100,0,0,0" Background="White"  Click="brisanje">
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Obrisi
                     </Label>
@@ -187,6 +187,8 @@
 
                     </Button.Resources>
                 </Button>
+                <Image x:Name="PrikazIkonice" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Cursor="Hand" />
+
 
             </Grid>
         </DockPanel>

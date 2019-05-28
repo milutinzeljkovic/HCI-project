@@ -274,7 +274,7 @@
                 <Calendar Height="170" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="25.8,8,-21,0"  
                 Name="calendar1" VerticalAlignment="Top" Width="180"  />
                 <Label Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6.2,1.2,4.6" Height="34" RenderTransformOrigin="0.561,0.902"  >Ikonica:</Label>
-                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White"  Name="btnDodajIkonicu">
+                <Button Grid.Row="3" Grid.Column="1" Height="30px" Width="80px" Margin="25.6,7.5,676,7.5" RenderTransformOrigin="0.231,0.307" Background="White"  Name="btnDodajIkonicu" Click="odabir_ikonice">
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi
                     </Label>
@@ -359,7 +359,7 @@
                     <RowDefinition Height="400px"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <ListView Margin="-44,30,-55,69" Name="lvUsers" Grid.Row="0" Grid.ColumnSpan="2" >
+                <ListView Margin="-44,30,-55,69" Name="lvUsers" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="select">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Oznaka" Width="100" DisplayMemberBinding="{Binding Oznaka}" />
@@ -376,6 +376,11 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+
+                <Image x:Name="PrikazIkonice" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Height="150" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Cursor="Hand" />
+
+
+
                 <Button Grid.Row="1"  Height="30px" Width="80px"  RenderTransformOrigin="0.231,0.307" Background="White" Name = "btnOdabirEtiketa"  Margin="0,0,0,0" Click="odabir_click">
                     <Label Foreground="Black" HorizontalAlignment="Center" VerticalAlignment ="Center" Height="30" >
                         Odaberi

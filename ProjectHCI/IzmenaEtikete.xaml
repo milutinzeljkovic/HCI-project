@@ -110,7 +110,7 @@
                     <RowDefinition Height="350px"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <ListView Margin="10" Name="lvUsers" Grid.Row="0" Height="350px" >
+                <ListView Margin="10" Name="lvUsers" Grid.Row="0" Height="350px" SelectionChanged="select">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Oznaka" Width="120" DisplayMemberBinding="{Binding Oznaka}" />

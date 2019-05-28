@@ -21,7 +21,7 @@ namespace ProjectHCI
 	/// </summary>
 	public partial class IzmenaEtikete : Window
 	{
-
+		Etiketa selected;
 		private Etiketa etiketa;
 
 		public Etiketa Etiketa
@@ -89,12 +89,25 @@ namespace ProjectHCI
 			SolidColorBrush sbc = (SolidColorBrush)(new BrushConverter().ConvertFrom(etiketa.Boja));
 			Color color = (Color)ColorConverter.ConvertFromString(etiketa.Boja);
 			cp.SelectedColor = color;
-
+			//lvUsers.Background = color;
+			
 			odabir_etikete.Visibility = Visibility.Hidden;
 			izmena_etikete.Visibility = Visibility.Visible;
 
 
 		}
+
+		private void select(object sender, RoutedEventArgs e)
+		{
+			Console.WriteLine("selektovano");
+			selected = (Etiketa)lvUsers.SelectedItem;
+			Color color = (Color)ColorConverter.ConvertFromString(selected.Boja);
+			Brush brush = new SolidColorBrush(color);
+			lvUsers.Background = brush;
+
+		}
+
+
 		private void submit(object sender, RoutedEventArgs e)
 		{
 			ControllerFactory factory = new ControllerFactory();

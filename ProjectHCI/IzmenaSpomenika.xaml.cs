@@ -25,6 +25,8 @@ namespace ProjectHCI
 		private Dictionary<string, int> comboEra;
 		private Dictionary<string, int> comboTuristickiStatus;
 
+		private Monument selected = null;
+
 		private Monument spomenik;
 
 		public Monument Spomenik
@@ -124,9 +126,9 @@ namespace ProjectHCI
 		{
 			get => this.Dispatcher.Invoke(() =>
 			{
-				return tbSlika.Text;
+				return slika;
 			});
-			set { opis = value; }
+			set { slika = value; }
 		}
 
 
@@ -228,6 +230,25 @@ namespace ProjectHCI
 			Observers.App.Instance().PreviousState = "izmena_spomenika";
 
 		}
+		private void select(object sender,RoutedEventArgs e)
+		{
+			Console.WriteLine("selektovano");
+			selected = (Monument)lvUsers.SelectedItem;
+
+			try
+			{
+				if (!selected.Slika.Equals(""))
+					PrikazIkonice.Source = new BitmapImage(new Uri(selected.Slika));
+				else
+					PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
+			catch (Exception ex)
+			{
+				PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
+
+		}
+
 
 		private void odabir_click(object sender, RoutedEventArgs e)
 		{
@@ -263,9 +284,16 @@ namespace ProjectHCI
 					radioButtonDaUnesco.IsChecked = true;
 				else
 					radioButtonNeNaselje.IsChecked = true;
+				try
+				{
+					DateTime parsedDate = DateTime.Parse(monument.Datum);
+					calendar1.SelectedDate = parsedDate;
+				}
+				catch(Exception ex)
+				{
 
-				DateTime parsedDate = DateTime.Parse(monument.Datum);
-				calendar1.SelectedDate = parsedDate;
+				}
+				
 				if (monument.Obradjen.Equals("Da"))
 					checkBox.IsChecked = true;
 				else
@@ -335,6 +363,29 @@ namespace ProjectHCI
 
 
 		}
+
+		private void odabir_ikonice(object sender, RoutedEventArgs e)
+		{
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.DefaultExt = ".png";
+			dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+			Nullable<bool> result = dlg.ShowDialog();
+			if (result == true)
+			{
+				// Open document 
+				string filename = dlg.FileName;
+				string[] a = filename.Split('\\');
+				int c = a.Count();
+				string s = @"\";
+				filename = filename.Replace(s[0], '/');
+
+				Slika = filename;
+				
+
+			}
+		}
+
 
 		private void brisanje_click(object sender, RoutedEventArgs e)
 		{

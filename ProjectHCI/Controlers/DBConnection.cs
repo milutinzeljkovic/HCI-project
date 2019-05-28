@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectHCI.Controlers
 {
@@ -53,7 +54,16 @@ namespace ProjectHCI.Controlers
 				string connstring = string.Format("Server="+Server+"; database={0}; UID=" + Username + "; password=" + Password, databaseName);
 				connection = new MySql.Data.MySqlClient.MySqlConnection(connstring);
 				isConnected = true;
-				connection.Open();
+				try
+				{
+					connection.Open();
+				}
+				catch(Exception ex)
+				{
+					MessageBox.Show("No internet connection", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					return false;
+				}
+				
 			}
 
 			return true;

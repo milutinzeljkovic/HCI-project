@@ -18,6 +18,12 @@ namespace ProjectHCI.Controlers
 
 		public void handle()
 		{
+
+
+			MainWindow.Instance().prikazi_etikete.IsEnabled = false;
+			MainWindow.Instance().prikazi_spomenike.IsEnabled = false;
+			MainWindow.Instance().prikazi_tipove.IsEnabled = false;
+
 			resultSet = new Dictionary<string, Dictionary<string, string>>();
 			backgroundWorker = new BackgroundWorker
 
@@ -218,6 +224,9 @@ namespace ProjectHCI.Controlers
 
 
 			}
+			MainWindow.Instance().prikazi_etikete.IsEnabled = true;
+			MainWindow.Instance().prikazi_spomenike.IsEnabled = true;
+			MainWindow.Instance().prikazi_tipove.IsEnabled = true;
 			MainWindow.Instance().ListSpomenik = spomenici;
 
 

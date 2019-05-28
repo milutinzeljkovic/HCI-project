@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectHCI.Controlers
 {
@@ -113,6 +114,9 @@ namespace ProjectHCI.Controlers
 			if ((string)e.Result == "uspesno")
 			{
 				Console.WriteLine("completed");
+				MessageBox.Show("Uspesno modifikovano!", "Obavestenje", MessageBoxButton.OK, MessageBoxImage.Information);
+				Load l = new Load();
+				l.handle();
 				//Observers.App.Instance().State = "modifikacija_etikete_uspesno";
 
 			}

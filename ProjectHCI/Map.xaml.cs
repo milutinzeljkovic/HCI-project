@@ -66,9 +66,40 @@ namespace ProjectHCI
 					FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
 
 				// Find the data behind the ListViewItem
-				Monument monument = (Monument)listView.ItemContainerGenerator.
-					ItemFromContainer(listViewItem);
+				Monument monument = null;
+				try
+				{
+					 monument = (Monument)listView.ItemContainerGenerator.
+						ItemFromContainer(listViewItem);
+				}
+				catch(Exception ex)
+				{
 
+				}
+				try
+				{
+					if (!monument.Slika.Equals(""))
+						PrikazIkonice2.Source = new BitmapImage(new Uri(monument.Slika));
+					else
+						PrikazIkonice2.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+				}
+				catch (Exception ex)
+				{
+					PrikazIkonice2.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+				}
+
+
+				try
+				{
+					if (!monument.Slika.Equals(""))
+						PrikazIkonice.Source = new BitmapImage(new Uri(monument.Slika));
+					else
+						PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+				}
+				catch(Exception ex)
+				{
+					PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+				}
 				// Initialize the drag & drop operation
 				DataObject dragData = new DataObject("myFormat", monument);
 				DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
@@ -169,10 +200,25 @@ namespace ProjectHCI
 				{
 
 					selected = (Monument)man;
+					try
+					{
+						if (!man.Slika.Equals(""))
+							PrikazIkonice.Source = new BitmapImage(new Uri(man.Slika));
+						else
+							PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+					}
+					catch (Exception ex)
+					{
+						PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+					}
 				}
 			}
 			if (e.LeftButton == MouseButtonState.Released)
+			{
 				e.Handled = true;
+				//PrikazIkonice.Source = new BitmapImage();
+			}
+				
 
 		}
 
@@ -208,6 +254,7 @@ namespace ProjectHCI
 				DeleteSpomenikMapa d = new DeleteSpomenikMapa();
 				d.handle(selected);
 				Image zaBrisanje = null;
+				Spomenici.Add((Monument)selected);
 				foreach (Image img in canvasMap.Children)
 				{
 					if (selected.Oznaka.Equals(img.Tag))

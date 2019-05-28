@@ -11,7 +11,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView Margin="10" Name="lvUsers" Grid.Row="0" Height="100px" >
+        <ListView Margin="10" Name="lvUsers" Grid.Row="0" Height="150px" SelectionChanged="select" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ime" Width="120" DisplayMemberBinding="{Binding Ime}" />
@@ -36,5 +36,8 @@
 
             </Button.Resources>
         </Button>
+
+        <Image x:Name="PrikazIkonice" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Cursor="Hand" />
+
     </Grid>
 </Window>

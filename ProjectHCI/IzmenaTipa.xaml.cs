@@ -21,7 +21,7 @@ namespace ProjectHCI
 	/// </summary>
 	public partial class IzmenaTipa : Window
 	{
-
+		Tip selected;
 		private Tip tip;
 
 		public Tip SelektovaniTip
@@ -68,7 +68,7 @@ namespace ProjectHCI
 		{
 			get => this.Dispatcher.Invoke(() =>
 			{
-				return textBoxTipSlika.Text;
+				return slika;
 			});
 			set { slika = value; }
 		}
@@ -84,7 +84,50 @@ namespace ProjectHCI
 			set { ime = value; }
 		}
 
+		private void select(object sender, RoutedEventArgs e)
+		{
+			Console.WriteLine("selektovano");
+			selected = (Tip)lvUsers.SelectedItem;
+			Slika = selected.Icon;
 
+			try
+			{
+				if (!selected.Icon.Equals(""))
+					PrikazIkonice.Source = new BitmapImage(new Uri(selected.Icon));
+				else
+					PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
+			catch (Exception ex)
+			{
+				PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
+
+
+
+		}
+
+
+		private void odabir_ikonice(object sender, RoutedEventArgs e)
+		{
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.DefaultExt = ".png";
+			dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+			Nullable<bool> result = dlg.ShowDialog();
+			if (result == true)
+			{
+				// Open document 
+				string filename = dlg.FileName;
+				string[] a = filename.Split('\\');
+				int c = a.Count();
+				string s = @"\";
+				filename = filename.Replace(s[0], '/');
+
+				Slika = filename;
+
+
+			}
+		}
 
 		public IzmenaTipa()
 		{
@@ -141,6 +184,11 @@ namespace ProjectHCI
 			odabir_etikete.Visibility = Visibility.Visible;
 			izmena_etikete.Visibility = Visibility.Hidden;
 
+
+		}
+
+		private void lvUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
 
 		}
 	}

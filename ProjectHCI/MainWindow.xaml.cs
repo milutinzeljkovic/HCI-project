@@ -340,7 +340,7 @@ namespace ProjectHCI
 		{
 			get => this.Dispatcher.Invoke(() =>
 			{
-				return "slika";
+				return tSlika;
 			});
 			set { tSlika = value; }
 		}
@@ -455,7 +455,33 @@ namespace ProjectHCI
 
         }
 
-        public bool ShowPanel
+
+		private void tipIkonicaOdabir(object sender, RoutedEventArgs e)
+		{
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.DefaultExt = ".png";
+			dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+			Nullable<bool> result = dlg.ShowDialog(); 
+			if (result == true)
+			{
+				// Open document 
+				string filename = dlg.FileName;
+				string[] a = filename.Split('\\');
+				int c = a.Count();
+				string s = @"\";
+				filename = filename.Replace(s[0], '/');
+
+				TSlika = filename;
+
+
+			}
+
+
+		}
+
+
+		public bool ShowPanel
         {
             get { return _showPanel; }
         }

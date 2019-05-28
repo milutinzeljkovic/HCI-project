@@ -8,13 +8,14 @@
         Title="Map"  Height="600" Width="1200">
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="500px" />
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200px"/>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Grid.Row="0" Name="lvSpomenici" ItemsSource="{Binding Spomenici}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
+        <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="1" Height="400px"  Name="lvSpomenici" Margin="0,-80,0,0" ItemsSource="{Binding Spomenici}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -26,13 +27,28 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Canvas x:Name="canvasMap" Width="950px" Height="500px" Grid.Column="1" HorizontalAlignment="Center" Margin="10,10,10,10"  AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop">
+        <Canvas x:Name="canvasMap" Width="950px" Grid.Row="0" Height="500px" Grid.Column="1" HorizontalAlignment="Center" Margin="10,10,10,10"  AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop">
             <Canvas.Background>
                 <ImageBrush ImageSource="mapanovisad.jpg" />
             </Canvas.Background>
         </Canvas>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="33.2,541,0,0" VerticalAlignment="Top" Width="75" Click="delete"/>
+        
 
 
+        <Button Content="Remove" Grid.Column="1" Grid.Row="1" Height="30px" Width="80px" Background="White" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"  Click="delete">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="BorderBrush" Value="#4288c1"/>
+                    <Setter Property="BorderThickness" Value="5px"/>
+                </Style>
+
+            </Button.Resources>
+        </Button>
+        <Image x:Name="PrikazIkonice" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Height="50" Margin="100,15,0,0" VerticalAlignment="Top" Width="50" Cursor="Hand" />
+        <Image x:Name="PrikazIkonice2" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Height="150" Margin="0,-80,0,0" VerticalAlignment="Top" Width="150" Cursor="Hand" />
+        
+        
     </Grid>
 </Window>

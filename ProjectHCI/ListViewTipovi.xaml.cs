@@ -21,14 +21,37 @@ namespace ProjectHCI
 	/// </summary>
 	public partial class ListViewTipovi : Window
 	{
+		Tip selected;
 		
 		public ListViewTipovi()
 		{
 			InitializeComponent();
-			
+			foreach (var item in MainWindow.Instance().ListTipovi)
+			{
+				Console.WriteLine(item.Oznaka);
+			}
 			lvUsers.ItemsSource = MainWindow.Instance().ListTipovi;
 
 			
+
+		}
+
+		private void select(object sender, RoutedEventArgs e)
+		{
+			Console.WriteLine("selektovano");
+			selected = (Tip)lvUsers.SelectedItem;
+
+			try
+			{
+				if (!selected.Icon.Equals(""))
+					PrikazIkonice.Source = new BitmapImage(new Uri(selected.Icon));
+				else
+					PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
+			catch (Exception ex)
+			{
+				PrikazIkonice.Source = new BitmapImage(new Uri("C:/Users/milutin/source/repos/HCI-project/ProjectHCI/location.png"));
+			}
 
 		}
 
